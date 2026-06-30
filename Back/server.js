@@ -3,6 +3,9 @@ import express from "express";
 import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 import cors from "cors";
+import UserRoutes from "./Routes/UserRoutes.js";
+import AuthRoutes from "./Routes/AuthRoutes.js";
+// import AdminRoutes from "./Routes/AdminRoutes.js";
 dotenv.config();
 
 const app = express();
@@ -15,6 +18,9 @@ app.get("/das", (req, res) => {
 });
 
 
+app.use("/User", UserRoutes);
+app.use("/auth", AuthRoutes)
+// app.use("/admin", AdminRoutes)
 
 const startServer = async () => {
   try {
