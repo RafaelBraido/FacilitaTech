@@ -1,11 +1,12 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import User from "../models/User.js";
+import User from "../Models/User.js";
+
 
 const register = async (data) => {
   const { nome, email, password, telefone, idade, role } = data;
 
-  if (!nome || !email || !password) {
+  if (!nome || !email || !password|| !role) {
     const error = new Error("Nome, email e senha são obrigatórios");
     error.statusCode = 400;
     throw error;
