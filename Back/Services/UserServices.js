@@ -1,5 +1,6 @@
 import userController from "../Controllers/UserControllers.js";
 
+
 const updateMe = async (updateData) => {
   const user = await userController.findByIdAndUpdate(updateData.id, updateData, { new: true });
   return user;

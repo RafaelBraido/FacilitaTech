@@ -1,22 +1,3 @@
-import UserServices from "../Services/UserServices.js";
-
-const updateMe = async (req, res, next) => {
-  try {
-    res.status(200).json({ message: "Usuário atualizado com sucesso" });
-  } catch (error) {
-    next(error);
-  }
-}
-
-const DeleteMe = async (req, res, next) => {
-  try {
-    res.status(200).json({ message: "Usuário deletado com sucesso" });
-  } catch (error) {
-    next(error);
-  }
-}
-
-// ADMIN
 const BancoDeDados = async (req, res, next) => {
   try {
     const user = await authService.BancoDeDados(req.body);
@@ -52,9 +33,7 @@ const DeleteGuia = async (req, res, next) => {
 }
 
 export default {
-  updateMe,
-  DeleteMe,
   BancoDeDados,
   GuiaEspecifico,
   DeleteGuia
-};
+}
