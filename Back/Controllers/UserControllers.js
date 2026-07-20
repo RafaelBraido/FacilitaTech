@@ -1,60 +1,47 @@
+/**
+ * UserControllers.js
+ * ------------------
+ * Perfil do usuário logado (atualizar/excluir a própria conta) e,
+ * para admin, listar todos os usuários.
+ */
 import UserServices from "../Services/UserServices.js";
+
+// Antes: só devolvia { message: "..." } sem chamar o UserServices nem
+// mexer no banco — o usuário nunca era realmente atualizado ou excluído.
+// Agora chama o Service de verdade, usando o id de quem está logado
+// Confirmado no authMiddleware.js real: ele faz req.user = usuário do
+// banco (User.findById), então req.user.id funciona (getter virtual do
+// Mongoose para o _id). Nada a ajustar aqui.
 
 const updateMe = async (req, res, next) => {
   try {
-    res.status(200).json({ message: "Usuário atualizado com sucesso" });
+    const user = await UserServices.updateMe({ id: req.user.id, ...req.body });
+    res.status(200).json({ message: "Usuário atualizado com sucesso", data: user });
   } catch (error) {
     next(error);
   }
-}
+};
 
 const DeleteMe = async (req, res, next) => {
   try {
+    await UserServices.DeleteMe({ id: req.user.id });
     res.status(200).json({ message: "Usuário deletado com sucesso" });
   } catch (error) {
     next(error);
   }
-}
+};
 
-// ADMIN
-const BancoDeDados = async (req, res, next) => {
+const getAllUsers = async (req, res, next) => {
   try {
-    const user = await authService.BancoDeDados(req.body);
-
-    res.status(201).json({
-      message: "Cria um novo passo a passo no banco de dados",
-      data: user,
-    });
+    const users = await UserServices.getAllUsers();
+    res.status(200).json(users);
   } catch (error) {
     next(error);
   }
 };
-
-const GuiaEspecifico = async (req, res, next) => {
-  try {
-    const user = await authService.GuiaEspecifico(req.body);
-
-    res.status(201).json({
-      message: "Altera as informações de um guia específico",
-      data: user,
-    });
-  } catch (error) {
-    next(error);
-  }
-};
-
-const DeleteGuia = async (req, res, next) => {
-  try {
-    res.status(200).json({ message: "Deleta um guia do sistema." });
-  } catch (error) {
-    next(error);
-  }
-}
 
 export default {
   updateMe,
   DeleteMe,
-  BancoDeDados,
-  GuiaEspecifico,
-  DeleteGuia
+  getAllUsers,
 };

@@ -1,15 +1,32 @@
-import userController from "../Controllers/UserControllers.js";
+
+import User from "../Models/User.js";
 
 
 const updateMe = async (updateData) => {
-  const user = await userController.findByIdAndUpdate(updateData.id, updateData, { new: true });
+  const { id, ...camposParaAtualizar } = updateData;
+  // Ninguém deve conseguir se promover a admin editando o próprio perfil.
+  delete camposParaAtualizar.role;
+  delete camposParaAtualizar.active;
+
+  const user = await User.findByIdAndUpdate(id, camposParaAtualizar, {
+    new: true,
+    runValidators: true,
+  }).select("-password");
   return user;
-}
+};
+
 const DeleteMe = async (deleteData) => {
-  const user = await userController.findByIdAndDelete(deleteData.id);
+  const user = await User.findByIdAndDelete(deleteData.id).select("-password");
   return user;
-}
-export default {    
-updateMe,
-DeleteMe
+};
+
+const getAllUsers = async () => {
+  const users = await User.find().select("-password");
+  return users;
+};
+
+export default {
+  updateMe,
+  DeleteMe,
+  getAllUsers,
 };
