@@ -4,190 +4,207 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Entrar - FacilitaTech</title>
+<meta name="description" content="Acesse sua conta no FacilitaTech.">
 <style>
-  * { box-sizing: border-box; }
-  html { font-size: calc(16px * var(--font-scale, 1)); }
-  body {
-    margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center;
-    background: #f3f4f6; font-family: Arial, sans-serif;
-  }
-  .card { display: flex; width: 100%; max-width: 64rem; background: #fff; border-radius: 0.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.12); overflow: hidden; margin: 1rem; }
-  .brand { width: 50%; background: #4338ca; color: #fff; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 2.5rem; text-align: center; }
-  .brand h1 { font-size: 1.9rem; font-weight: 700; margin: 0 0 0.5rem; }
-  .brand p { font-size: 1.1rem; margin: 0; }
-  .form-side { width: 50%; padding: 2.5rem; }
-  .form-side h2 { font-size: 1.5rem; font-weight: 600; color: #1f2937; text-align: center; margin: 0 0 1.5rem; }
-  .field { margin-bottom: 1rem; }
-  .field label { display: block; font-size: 0.9rem; font-weight: 700; color: #374151; margin-bottom: 0.4rem; }
-  .field input {
-    width: 100%; padding: 0.6rem 1rem; border: 1px solid #d1d5db; border-radius: 0.4rem;
-    font-size: 1rem; font-family: inherit;
-  }
-  .field input:focus { outline: none; box-shadow: 0 0 0 2px #6366f1; border-color: #6366f1; }
-  .password-field { position: relative; }
-  .password-field input { padding-right: 4.5rem; }
-  .password-field button {
-    position: absolute; right: 0.5rem; top: 50%; transform: translateY(-50%);
-    background: none; border: none; font-weight: 700; color: #4f46e5; cursor: pointer;
-    padding: 0.3rem 0.5rem; font-size: 0.9rem;
-  }
-  .btn-entrar {
-    width: 100%; background: #4f46e5; color: #fff; border: none; padding: 0.85rem 1.2rem;
-    border-radius: 0.4rem; font-weight: 700; font-size: 1.1rem; cursor: pointer;
-  }
-  .btn-entrar:hover { background: #4338ca; }
-  .btn-entrar:disabled { opacity: 0.7; cursor: not-allowed; }
-  .rodape { text-align: center; margin-top: 1.5rem; font-size: 0.9rem; }
-  .rodape a { color: #4f46e5; font-weight: 700; text-decoration: none; }
-  .msg { display: none; margin-bottom: 1rem; padding: 0.75rem; border-radius: 0.4rem; font-size: 0.9rem; font-weight: 700; }
-  .msg.show { display: block; }
-  .msg.erro { background: #fee2e2; color: #b91c1c; }
+:root {
+  --color-bg: #f3f4f6;
+  --color-surface: #FFFFFF;
+  --color-text: #1f2937;
+  --color-text-soft: #555555;
+  --color-primary: #4338ca;
+  --color-primary-dark: #3730a3;
+  --color-primary-soft: #eef2ff;
+  --color-accent: #4f46e5;
+  --color-accent-dark: #4338ca;
+  --color-success: #15803d;
+  --color-success-soft: #dcfce7;
+  --color-border: #d1d5db;
+  --color-focus: #6366f1;
+  --font-body: Arial, Helvetica, sans-serif;
+  --font-display: Arial, Helvetica, sans-serif;
+  --font-scale: 1;
+  --radius-lg: 0.5rem;
+  --radius-md: 0.4rem;
+  --shadow: 0 10px 30px rgba(0,0,0,0.12);
+}
 
-  .text-size-widget {
-    position: fixed; right: 1.2rem; bottom: 1.2rem;
-    background: #fff; border: 2px solid #4338ca; border-radius: 999px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.12);
-    display: flex; align-items: center; gap: 0.3rem; padding: 0.4rem; z-index: 200;
-  }
-  .text-size-widget button {
-    width: 46px; height: 46px; border-radius: 50%; border: none;
-    background: #eef2ff; color: #3730a3; font-weight: 700; font-size: 1.1rem; cursor: pointer;
-  }
-  .text-size-widget button:hover { background: #4338ca; color: #fff; }
-  .text-size-widget .label { font-size: 0.8rem; font-weight: 700; color: #555; padding: 0 0.4rem; white-space: nowrap; }
+* { box-sizing: border-box; }
+html { font-size: calc(16px * var(--font-scale)); }
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+h1 { font-family: var(--font-display); color: var(--color-text); font-size: 1.7rem; font-weight: 700; margin: 0 0 0.4em; }
+p { margin: 0 0 1em; }
+a { color: var(--color-primary); }
 
-  @media (max-width: 640px) {
-    .card { flex-direction: column; }
-    .brand, .form-side { width: 100%; }
-  }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+.skip-link {
+  position: absolute; left: -9999px; top: 0;
+  background: var(--color-primary-dark); color: #fff;
+  padding: 0.9rem 1.2rem; border-radius: 0 0 var(--radius-md) 0; z-index: 1000; font-weight: 700;
+}
+.skip-link:focus { left: 0; }
+
+.card { display: flex; width: 100%; max-width: 64rem; background: var(--color-surface); border-radius: var(--radius-lg); box-shadow: var(--shadow); overflow: hidden; margin: 1rem; }
+.brand {
+  width: 38%; background: var(--color-primary); color: #fff;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  padding: 2.5rem; text-align: center; flex-shrink: 0;
+}
+.brand .logo { display: flex; align-items: center; gap: 0.5rem; font-size: 1.6rem; font-weight: 700; margin-bottom: 0.5rem; }
+.brand p { font-size: 1rem; opacity: 0.9; }
+.content-side { flex: 1; padding: 2rem 2.5rem; max-height: 92vh; overflow-y: auto; min-width: 0; }
+
+.container-narrow { max-width: 420px; margin: 0 auto; padding: 0; }
+
+.field { margin-bottom: 1rem; }
+.field label { display: block; font-size: 0.9rem; font-weight: 700; color: #374151; margin-bottom: 0.4rem; }
+.field input {
+  width: 100%; font-family: var(--font-body); font-size: 1rem;
+  padding: 0.6rem 1rem; border: 1px solid var(--color-border); border-radius: var(--radius-md);
+  background: #fff; color: var(--color-text);
+}
+.field input:focus { border-color: var(--color-primary); outline: none; box-shadow: 0 0 0 2px var(--color-primary-soft); }
+.password-field { position: relative; }
+.password-field button {
+  position: absolute; right: 0.6rem; top: 50%; transform: translateY(-50%);
+  background: none; border: none; font-weight: 700; color: var(--color-primary); cursor: pointer;
+  padding: 0.3rem 0.5rem; font-size: 0.9rem;
+}
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;
+  font-family: var(--font-body); font-size: 1.1rem; font-weight: 700;
+  padding: 0.85rem 1.2rem; border-radius: var(--radius-md); border: 2px solid transparent;
+  cursor: pointer; text-decoration: none; min-height: 48px; width: 100%;
+  background: var(--color-accent); color: #fff;
+  transition: background 0.15s ease;
+}
+.btn:hover { background: var(--color-accent-dark); }
+.btn:disabled { opacity: 0.7; cursor: not-allowed; }
+
+.form-message { border-radius: var(--radius-md); padding: 0.75rem 1rem; margin-bottom: 1rem; font-weight: 700; font-size: 0.9rem; display: none; }
+.form-message.show { display: block; }
+.form-message.error { background: #fee2e2; color: #b91c1c; }
+.form-message.success { background: var(--color-success-soft); color: var(--color-success); }
+
+@media (max-width: 700px) {
+  .card { flex-direction: column; max-width: 30rem; }
+  .brand { width: 100%; padding: 1.5rem; }
+  .content-side { padding: 1.5rem; max-height: none; }
+}
 </style>
 </head>
 <body>
-  <div class="card">
-    <div class="brand">
-      <h1>FacilitaTech</h1>
-      <p>Tutoriais simples de tecnologia, no seu tempo</p>
-    </div>
-    <div class="form-side">
-      <h2>Entrar</h2>
-      <div id="login-message" class="msg erro"></div>
-      <form id="login-form">
+
+<a href="#conteudo-principal" class="skip-link">Pular para o conteúdo</a>
+
+<div class="card">
+  <div class="brand">
+    <span class="logo">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.6 10.8c.5.4.8 1 .8 1.7V16h5.6v-.5c0-.7.3-1.3.8-1.7A6 6 0 0 0 12 3Z" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      FacilitaTech
+    </span>
+    <p>Tutoriais simples de tecnologia, no seu tempo</p>
+  </div>
+
+  <div class="content-side" id="conteudo-principal">
+    <div class="container-narrow">
+      <h1>Entrar na sua conta</h1>
+      <p>Digite seu nome e sua senha para continuar.</p>
+
+      <div id="login-message" class="form-message"></div>
+
+      <form id="login-form" novalidate>
         <div class="field">
-          <label for="nome">Nome</label>
-          <input id="nome" type="text" autocomplete="name" maxlength="60" required autofocus>
+          <label for="login-nome">Seu nome</label>
+          <input type="text" id="login-nome" autocomplete="username" maxlength="60" required>
         </div>
         <div class="field">
-          <label for="password">Senha</label>
+          <label for="login-password">Sua senha</label>
           <div class="password-field">
-            <input id="password" type="password" autocomplete="current-password" required>
+            <input type="password" id="login-password" autocomplete="current-password" required>
             <button type="button" id="toggle-senha" aria-label="Mostrar senha">Mostrar</button>
           </div>
         </div>
-        <button type="submit" id="login-submit" class="btn-entrar">Entrar</button>
+        <button type="submit" class="btn" id="login-submit">Entrar</button>
       </form>
-      <p class="rodape">Ainda não tem conta? <a href="index.html">Criar conta</a></p>
+
+      <p style="margin-top: 1.5rem; text-align: center; font-size: 0.95rem;">
+        Ainda não tem uma conta? <a href="index.html">Criar conta</a>
+      </p>
     </div>
   </div>
+</div>
 
 <script>
-  const API_BASE_URL = (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
-    ? "http://localhost:3000"
-    : "https://facilitatech.onrender.com";
+const API_BASE_URL = (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
+  ? "http://localhost:3000"
+  : "https://facilitatech.onrender.com";
 
-  async function apiRequest(path, { method = "GET", body } = {}) {
-    let response;
-    try {
-      response = await fetch(`${API_BASE_URL}${path}`, {
-        method,
-        headers: { "Content-Type": "application/json" },
-        body: body ? JSON.stringify(body) : undefined,
-      });
-    } catch (_) {
-      throw new Error("Não foi possível falar com o servidor. Verifique sua internet.");
-    }
-    let data = null;
-    try { data = await response.json(); } catch (_) {}
-    if (!response.ok) {
-      throw new Error((data && (data.message || data.error)) || "Algo deu errado. Tente de novo.");
-    }
-    return data;
-  }
+document.getElementById("toggle-senha").addEventListener("click", () => {
+  const input = document.getElementById("login-password");
+  const btn = document.getElementById("toggle-senha");
+  const showing = input.type === "text";
+  input.type = showing ? "password" : "text";
+  btn.textContent = showing ? "Mostrar" : "Ocultar";
+});
 
-  async function loginUser(payload) {
-    const resposta = await apiRequest("/auth/login", { method: "POST", body: payload });
-    return resposta.data;
-  }
-
-  const FONT_SCALES = [1, 1.15, 1.3, 1.5, 1.7];
-  const FONT_SCALE_KEY = "ft_font_scale_index";
-  function applyFontScale(index) {
-    document.documentElement.style.setProperty("--font-scale", FONT_SCALES[index]);
-    localStorage.setItem(FONT_SCALE_KEY, index);
-    const label = document.getElementById("ft-font-scale-label");
-    if (label) label.textContent = `Letra ${Math.round(FONT_SCALES[index] * 100)}%`;
-  }
-  (function initTextSizeWidget() {
-    const widget = document.createElement("div");
-    widget.className = "text-size-widget";
-    widget.innerHTML = `
-      <button type="button" id="ft-font-decrease" aria-label="Diminuir tamanho da letra">A-</button>
-      <span class="label" id="ft-font-scale-label">Letra 100%</span>
-      <button type="button" id="ft-font-increase" aria-label="Aumentar tamanho da letra">A+</button>
-    `;
-    document.body.appendChild(widget);
-    const saved = parseInt(localStorage.getItem(FONT_SCALE_KEY), 10);
-    let index = Number.isInteger(saved) && saved >= 0 && saved < FONT_SCALES.length ? saved : 0;
-    applyFontScale(index);
-    document.getElementById("ft-font-increase").addEventListener("click", () => {
-      index = Math.min(index + 1, FONT_SCALES.length - 1);
-      applyFontScale(index);
-    });
-    document.getElementById("ft-font-decrease").addEventListener("click", () => {
-      index = Math.max(index - 1, 0);
-      applyFontScale(index);
-    });
-  })();
-
-  if (localStorage.getItem("ft_token")) {
-    window.location.href = "index.html";
-  }
-
-  document.getElementById("toggle-senha").addEventListener("click", (e) => {
-    const input = document.getElementById("password");
-    const showing = input.type === "text";
-    input.type = showing ? "password" : "text";
-    e.target.textContent = showing ? "Mostrar" : "Ocultar";
-    e.target.setAttribute("aria-label", showing ? "Mostrar senha" : "Ocultar senha");
-  });
-
-  const form = document.getElementById("login-form");
+document.getElementById("login-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
   const message = document.getElementById("login-message");
   const submitBtn = document.getElementById("login-submit");
+  
+  message.className = "form-message";
+  submitBtn.disabled = true;
+  submitBtn.textContent = "Entrando...";
 
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    message.className = "msg erro";
-    submitBtn.disabled = true;
-    submitBtn.textContent = "Entrando...";
-    try {
-      const nome = document.getElementById("nome").value.trim();
-      const password = document.getElementById("password").value;
-      const data = await loginUser({ nome, password });
+  try {
+    const nome = document.getElementById("login-nome").value.trim();
+    const password = document.getElementById("login-password").value;
 
-      if (data.token) localStorage.setItem("ft_token", data.token);
-      if (data.user) {
-        if (data.user._id) localStorage.setItem("ft_user_id", data.user._id);
-        if (data.user.nome) localStorage.setItem("ft_user_nome", data.user.nome);
-        if (data.user.role) localStorage.setItem("ft_user_role", data.user.role);
-      }
-      window.location.href = "index.html";
-    } catch (err) {
-      message.textContent = err.message;
-      message.className = "msg erro show";
-      submitBtn.disabled = false;
-      submitBtn.textContent = "Entrar";
+    const response = await fetch(`${API_BASE_URL}/auth/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ nome, password })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || data.error || "Nome ou senha incorretos.");
     }
-  });
+
+    if (data.token) localStorage.setItem("ft_token", data.token);
+    if (data.user) {
+      if (data.user._id) localStorage.setItem("ft_user_id", data.user._id);
+      if (data.user.nome) localStorage.setItem("ft_user_nome", data.user.nome);
+      if (data.user.role) localStorage.setItem("ft_user_role", data.user.role);
+    }
+
+    window.location.href = "index.html";
+  } catch (err) {
+    message.textContent = err.message;
+    message.className = "form-message show error";
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = "Entrar";
+  }
+});
 </script>
 </body>
 </html>

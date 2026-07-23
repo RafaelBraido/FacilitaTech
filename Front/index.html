@@ -306,14 +306,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
       </form>
     </section>
 
-  </div>
     </div>
   </div>
+</div>
 
 <script>
-// ============================================================
-// CONFIGURAÇÃO E COMUNICAÇÃO COM O BACK-END
-// ============================================================
 const API_BASE_URL = (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
   ? "http://localhost:3000"
   : "https://facilitatech.onrender.com";
@@ -340,27 +337,23 @@ async function apiRequest(path, { method = "GET", body, auth = false } = {}) {
   return data;
 }
 
-// O AuthControllers.js real embrulha a resposta em { message, data }.
-// Por isso desempacotamos "data" aqui, uma vez só, em vez de espalhar
-// ".data.data" por todo o resto do código.
 async function loginUser(payload) {
   const resposta = await apiRequest("/auth/login", { method: "POST", body: payload });
-  return resposta.data; // { user, token }
+  return resposta.data;
 }
 async function registerUser({ nome, password }) {
   const resposta = await apiRequest("/auth/register", { method: "POST", body: { nome, password, role: "user" } });
-  return resposta.data; // { user, token } — já vem com token, não precisa logar de novo
+  return resposta.data;
 }
 
 async function entrarComCodigo(codigo) {
   const resposta = await apiRequest("/Admin/codigo", { method: "POST", body: { codigo } });
-  return resposta; // { token, user }
+  return resposta;
 }
 async function createTutorial(payload) {
   const resposta = await apiRequest("/Tutorial/create/tutorial", { method: "POST", body: payload, auth: true });
   return resposta.data;
 }
-// GET /Tutorial/All/tutorial — devolve o array direto (sem envelope { data }).
 async function getTutoriais() {
   return apiRequest("/Tutorial/All/tutorial", { auth: true });
 }
@@ -371,21 +364,10 @@ async function editarTutorial(id, payload) {
 async function excluirTutorial(id) {
   return apiRequest(`/Tutorial/delete/tutorial/${id}`, { method: "DELETE", auth: true });
 }
-// GET /Admin/usuarios — devolve o array direto (rota própria, sem envelope).
 async function getUsuarios() {
   return apiRequest("/Admin/usuarios", { auth: true });
 }
-async function atualizarMeuPerfil(payload) {
-  const resposta = await apiRequest("/User/me", { method: "PUT", body: payload, auth: true });
-  return resposta.data;
-}
-async function excluirMinhaConta() {
-  return apiRequest("/User/me", { method: "DELETE", auth: true });
-}
 
-// ============================================================
-// SESSÃO: ler o token salvo, saber se é admin
-// ============================================================
 function decodeJwt(token) {
   try {
     const payload = token.split(".")[1];
@@ -399,9 +381,6 @@ function isAdmin() {
   return Boolean(payload && (payload.role === "admin" || payload.isAdmin === true));
 }
 
-// ============================================================
-// NAVEGAÇÃO ENTRE TELAS (tudo em uma página só, sem recarregar)
-// ============================================================
 function updateNav() {
   const nav = document.getElementById("nav-area");
   const token = localStorage.getItem("ft_token");
@@ -452,9 +431,6 @@ document.querySelectorAll('a[data-view]').forEach((a) => {
   a.addEventListener("click", (e) => { e.preventDefault(); showView(a.dataset.view); });
 });
 
-// ============================================================
-// BOTÃO A- / A+ (acessibilidade: aumentar/diminuir a letra)
-// ============================================================
 const FONT_SCALES = [1, 1.15, 1.3, 1.5, 1.7];
 const FONT_SCALE_KEY = "ft_font_scale_index";
 function applyFontScale(index) {
@@ -487,9 +463,6 @@ function applyFontScale(index) {
   });
 })();
 
-// ============================================================
-// MOSTRAR / OCULTAR SENHA
-// ============================================================
 document.querySelectorAll("[data-toggle-senha]").forEach((btn) => {
   btn.addEventListener("click", () => {
     const input = document.getElementById(btn.dataset.toggleSenha);
@@ -513,9 +486,6 @@ function mostrarBoasVindas(user) {
   document.getElementById("bemvindo-btn-tutorial").style.display = ehAdmin ? "inline-flex" : "none";
 }
 
-// ============================================================
-// FORMULÁRIOS: criar conta, entrar como admin, criar tutorial
-// ============================================================
 document.getElementById("cadastro-form").addEventListener("submit", async (e) => {
   e.preventDefault();
   const message = document.getElementById("cadastro-message");
@@ -528,8 +498,6 @@ document.getElementById("cadastro-form").addEventListener("submit", async (e) =>
     const nome = document.getElementById("cad-nome").value.trim();
     const password = document.getElementById("cad-password").value;
 
-    // Uma chamada só: o /auth/register já devolve o token de uma vez,
-    // não precisa mais chamar /auth/login em seguida.
     const data = await registerUser({ nome, password });
     clearTimeout(avisoDemora);
 
@@ -610,9 +578,6 @@ document.getElementById("novo-tutorial-form").addEventListener("submit", async (
   }
 });
 
-// ============================================================
-// TUTORIAIS: listar (todo mundo vê); editar/excluir (só admin)
-// ============================================================
 function escapeHtml(texto) {
   const div = document.createElement("div");
   div.textContent = texto ?? "";
@@ -694,9 +659,6 @@ document.getElementById("tutoriais-lista").addEventListener("click", async (e) =
   }
 });
 
-// ============================================================
-// USUÁRIOS (admin): listar
-// ============================================================
 async function carregarUsuarios() {
   const lista = document.getElementById("usuarios-lista");
   lista.innerHTML = '<p class="hint">Carregando...</p>';
@@ -717,67 +679,13 @@ async function carregarUsuarios() {
   }
 }
 
-// ============================================================
-// PERFIL: atualizar meus dados, excluir minha conta
-// ============================================================
 function prepararPerfil() {
   document.getElementById("perfil-nome").value = localStorage.getItem("ft_user_nome") || "";
   document.getElementById("perfil-password").value = "";
   document.getElementById("perfil-message").className = "form-message";
 }
 
-document.getElementById("perfil-form").addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const message = document.getElementById("perfil-message");
-  const submitBtn = document.getElementById("perfil-submit");
-  message.className = "form-message";
-  submitBtn.disabled = true;
-  submitBtn.textContent = "Salvando...";
-  try {
-    const nome = document.getElementById("perfil-nome").value.trim();
-    const password = document.getElementById("perfil-password").value;
-    const payload = { nome };
-    if (password) payload.password = password;
-    const usuario = await atualizarMeuPerfil(payload);
-    if (usuario && usuario.nome) localStorage.setItem("ft_user_nome", usuario.nome);
-    updateNav();
-    document.getElementById("perfil-password").value = "";
-    message.textContent = "Dados atualizados com sucesso!";
-    message.className = "form-message show success";
-  } catch (err) {
-    message.textContent = err.message;
-    message.className = "form-message show error";
-  } finally {
-    submitBtn.disabled = false;
-    submitBtn.textContent = "Salvar alterações";
-  }
-});
-
-document.getElementById("perfil-btn-excluir").addEventListener("click", async () => {
-  if (!confirm("Excluir sua conta para sempre? Essa ação não pode ser desfeita.")) return;
-  try {
-    await excluirMinhaConta();
-    localStorage.removeItem("ft_token");
-    localStorage.removeItem("ft_user_id");
-    localStorage.removeItem("ft_user_nome");
-    localStorage.removeItem("ft_user_role");
-    updateNav();
-    showView("view-cadastro");
-  } catch (err) {
-    alert(err.message);
-  }
-});
-
-// ============================================================
-// INICIALIZAÇÃO: monta o menu certo e mostra a tela inicial certa
-// ============================================================
 updateNav();
-if (localStorage.getItem("ft_token")) {
-  showView("view-tutoriais");
-  carregarTutoriais();
-} else {
-  showView("view-cadastro");
-}
 </script>
 </body>
 </html>
