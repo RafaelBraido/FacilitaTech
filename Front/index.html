@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FacilitaTech</title>
+<meta name="description" content="Crie sua conta e comece a aprender tecnologia no seu tempo.">
+<style>
+:root {
+  --color-bg: #f3f4f6;
+  --color-surface: #FFFFFF;
+  --color-text: #1f2937;
+  --color-text-soft: #555555;
+  --color-primary: #4338ca;
+  --color-primary-dark: #3730a3;
+  --color-primary-soft: #eef2ff;
+  --color-accent: #4f46e5;
+  --color-accent-dark: #4338ca;
+  --color-success: #15803d;
+  --color-success-soft: #dcfce7;
+  --color-border: #d1d5db;
+  --color-focus: #6366f1;
+  --font-body: Arial, Helvetica, sans-serif;
+  --font-display: Arial, Helvetica, sans-serif;
+  --font-scale: 1;
+  --radius-lg: 0.5rem;
+  --radius-md: 0.4rem;
+  --shadow: 0 10px 30px rgba(0,0,0,0.12);
+}
+
+* { box-sizing: border-box; }
+html { font-size: calc(16px * var(--font-scale)); }
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+h1 { font-family: var(--font-display); color: var(--color-text); font-size: 1.7rem; font-weight: 700; margin: 0 0 0.4em; }
+p { margin: 0 0 1em; }
+a { color: var(--color-primary); }
+
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+.skip-link {
+  position: absolute; left: -9999px; top: 0;
+  background: var(--color-primary-dark); color: #fff;
+  padding: 0.9rem 1.2rem; border-radius: 0 0 var(--radius-md) 0; z-index: 1000; font-weight: 700;
+}
+.skip-link:focus { left: 0; }
+
+.card { display: flex; width: 100%; max-width: 64rem; background: var(--color-surface); border-radius: var(--radius-lg); box-shadow: var(--shadow); overflow: hidden; margin: 1rem; }
+.brand {
+  width: 38%; background: var(--color-primary); color: #fff;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  padding: 2.5rem; text-align: center; flex-shrink: 0;
+}
+.brand .logo { display: flex; align-items: center; gap: 0.5rem; font-size: 1.6rem; font-weight: 700; margin-bottom: 0.5rem; }
+.brand p { font-size: 1rem; opacity: 0.9; }
+.content-side { flex: 1; padding: 2rem 2.5rem; max-height: 92vh; overflow-y: auto; min-width: 0; }
+
+#nav-area { display: flex; align-items: center; justify-content: flex-end; gap: 0.3rem; flex-wrap: wrap; margin-bottom: 1rem; }
+#nav-area a, #nav-area button {
+  font-family: var(--font-body); font-weight: 700; font-size: 0.9rem;
+  background: none; border: none; color: var(--color-text-soft); cursor: pointer;
+  padding: 0.5rem 0.8rem; border-radius: var(--radius-md); text-decoration: none;
+  transition: background 0.15s ease;
+}
+#nav-area a:hover, #nav-area button:hover { background: var(--color-primary-soft); }
+#nav-area a[aria-current="page"] { background: var(--color-primary-soft); color: var(--color-primary-dark); }
+#nav-area .sair-btn { border: 1px solid var(--color-primary); color: var(--color-primary-dark); }
+
+.container-narrow { max-width: 420px; margin: 0 auto; padding: 0; }
+.view[hidden] { display: none; }
+
+.badge {
+  display: inline-block; font-size: 0.85rem; font-weight: 700;
+  padding: 0.3rem 0.8rem; border-radius: 999px;
+  background: var(--color-success-soft); color: var(--color-success);
+  width: fit-content; margin-bottom: 0.8rem;
+}
+
+.form-card { padding: 0; }
+.field { margin-bottom: 1rem; }
+.field label { display: block; font-size: 0.9rem; font-weight: 700; color: #374151; margin-bottom: 0.4rem; }
+.field input, .field textarea {
+  width: 100%; font-family: var(--font-body); font-size: 1rem;
+  padding: 0.6rem 1rem; border: 1px solid var(--color-border); border-radius: var(--radius-md);
+  background: #fff; color: var(--color-text);
+}
+.field input:focus, .field textarea:focus { border-color: var(--color-primary); outline: none; box-shadow: 0 0 0 2px var(--color-primary-soft); }
+.field input.codigo-input { font-size: 1.8rem; letter-spacing: 0.5rem; text-align: center; font-weight: 700; }
+.password-field { position: relative; }
+.password-field button {
+  position: absolute; right: 0.6rem; top: 50%; transform: translateY(-50%);
+  background: none; border: none; font-weight: 700; color: var(--color-primary); cursor: pointer;
+  padding: 0.3rem 0.5rem; font-size: 0.9rem;
+}
+.hint { font-size: 0.85rem; color: var(--color-text-soft); margin-top: 0.35rem; }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;
+  font-family: var(--font-body); font-size: 1.1rem; font-weight: 700;
+  padding: 0.85rem 1.2rem; border-radius: var(--radius-md); border: 2px solid transparent;
+  cursor: pointer; text-decoration: none; min-height: 48px; width: 100%;
+  background: var(--color-accent); color: #fff;
+  transition: background 0.15s ease;
+}
+.btn:hover { background: var(--color-accent-dark); }
+.btn:active { transform: scale(0.98); }
+.btn:disabled { opacity: 0.7; cursor: not-allowed; }
+.btn-text {
+  background: none; border: none; color: var(--color-primary); font-weight: 700;
+  font-family: var(--font-body); font-size: 0.95rem; cursor: pointer; padding: 0.5rem; width: auto;
+  min-height: auto; text-decoration: underline;
+}
+
+.form-message { border-radius: var(--radius-md); padding: 0.75rem 1rem; margin-bottom: 1rem; font-weight: 700; font-size: 0.9rem; display: none; }
+.form-message.show { display: block; }
+.form-message.error { background: #fee2e2; color: #b91c1c; }
+.form-message.success { background: var(--color-success-soft); color: var(--color-success); }
+
+.text-size-widget {
+  position: fixed; right: 1.2rem; bottom: 1.2rem;
+  background: var(--color-surface); border: 2px solid var(--color-primary);
+  border-radius: 999px; box-shadow: var(--shadow);
+  display: flex; align-items: center; gap: 0.3rem; padding: 0.4rem; z-index: 200;
+}
+.text-size-widget button {
+  width: 42px; height: 42px; border-radius: 50%; border: none;
+  background: var(--color-primary-soft); color: var(--color-primary-dark);
+  font-weight: 700; font-size: 1rem; cursor: pointer;
+}
+.text-size-widget button:hover { background: var(--color-primary); color: #fff; }
+.text-size-widget .label { font-size: 0.75rem; font-weight: 700; color: var(--color-text-soft); padding: 0 0.4rem; white-space: nowrap; }
+@media (max-width: 520px) { .text-size-widget .label { display: none; } }
+.passo-oculto { display: none; }
+.note-title-input {
+  display: block; width: 100%; font-family: var(--font-body);
+  font-size: 1.3rem; font-weight: 700; color: var(--color-text);
+  padding: 1rem 1.1rem; border: 2px solid var(--color-border);
+  border-radius: var(--radius-md); margin-bottom: 1rem; background: #fff;
+}
+.note-title-input::placeholder { color: #9ca3af; font-weight: 700; }
+.note-title-input:focus {
+  outline: none; border-color: var(--color-focus);
+  box-shadow: 0 0 0 3px var(--color-primary-soft);
+}
+.note-content-textarea {
+  display: block; width: 100%; min-height: 260px; font-family: var(--font-body);
+  font-size: 1.05rem; line-height: 1.6; color: var(--color-text);
+  padding: 1rem 1.1rem; border: 1px solid var(--color-border);
+  border-radius: var(--radius-md); margin-bottom: 1.2rem; background: #fff;
+  resize: vertical;
+}
+.note-content-textarea::placeholder { color: #9ca3af; }
+.note-content-textarea:focus {
+  outline: none; border-color: var(--color-focus);
+  box-shadow: 0 0 0 3px var(--color-primary-soft);
+}
+.profile-avatar-letra {
+  width: 64px; height: 64px; border-radius: 50%; margin: 0 auto;
+  background: var(--color-primary); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem; font-weight: 700;
+}
+@media (max-width: 700px) {
+  .card { flex-direction: column; max-width: 30rem; }
+  .brand { width: 100%; padding: 1.5rem; }
+  .content-side { padding: 1.5rem; max-height: none; }
+}
+</style>
+</head>
+<body>
+
+<a href="#conteudo-principal" class="skip-link">Pular para o conteúdo</a>
+
+<div class="card">
+  <div class="brand">
+    <span class="logo">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.6 10.8c.5.4.8 1 .8 1.7V16h5.6v-.5c0-.7.3-1.3.8-1.7A6 6 0 0 0 12 3Z" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      FacilitaTech
+    </span>
+    <p>Tutoriais simples de tecnologia, no seu tempo</p>
+  </div>
+
+  <div class="content-side" id="conteudo-principal">
+    <nav id="nav-area" aria-label="Menu principal"></nav>
+    <div class="container-narrow">
+
+    <section id="view-cadastro" class="view">
+      <h1>Criar sua conta</h1>
+      <p>Só nome e senha. Rapidinho.</p>
+      <div class="form-card">
+        <div id="cadastro-message" class="form-message"></div>
+        <form id="cadastro-form" novalidate>
+          <div class="field">
+            <label for="cad-nome">Seu nome</label>
+            <input type="text" id="cad-nome" autocomplete="name" maxlength="60" required>
+          </div>
+          <div class="field">
+            <label for="cad-password">Crie uma senha</label>
+            <div class="password-field">
+              <input type="password" id="cad-password" autocomplete="new-password" required>
+              <button type="button" data-toggle-senha="cad-password" aria-label="Mostrar senha">Mostrar</button>
+            </div>
+          </div>
+          <button type="submit" class="btn" id="cadastro-submit">Criar minha conta</button>
+        </form>
+      </div>
+    </section>
+
+    <section id="view-bemvindo" class="view" hidden>
+      <span class="badge" id="bemvindo-badge" style="display:none;">Área do administrador</span>
+      <h1 id="bemvindo-titulo">Conta criada!</h1>
+      <p id="bemvindo-texto">Tudo pronto. Você já está conectado.</p>
+      <div class="form-card" style="text-align:center;">
+        <div class="profile-avatar-letra" id="bemvindo-avatar" aria-hidden="true"></div>
+        <p style="margin-top:1.2rem; font-size:1.2rem; font-weight:700;" id="bemvindo-nome"></p>
+        <a href="#" class="btn" style="margin-top:1.2rem;" data-view="view-tutoriais">Ver tutoriais</a>
+        <a href="#" class="btn" id="bemvindo-btn-tutorial" style="margin-top:0.8rem; display:none; background:var(--color-primary);" data-view="view-tutorial">Criar meu primeiro tutorial</a>
+      </div>
+      <div class="form-card" id="bemvindo-proximos-passos" style="margin-top:1.5rem; text-align:left;">
+        <h3 style="margin-bottom:0.8rem;">O que acontece agora</h3>
+        <ul style="margin:0; padding-left:1.3rem; line-height:1.9;">
+          <li>Sua conta já foi salva. Não precisa fazer mais nada agora.</li>
+          <li>Da próxima vez que abrir esta página neste mesmo navegador, você já vai entrar direto.</li>
+          <li>Se quiser sair, use o botão "Sair" no topo da tela.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="view-codigo-admin" class="view" hidden>
+      <h1>Entrar como admin</h1>
+      <p>Digite o código de acesso. Não precisa de e-mail nem conta.</p>
+      <div class="form-card">
+        <div id="codigo-admin-message" class="form-message"></div>
+        <form id="codigo-admin-form" novalidate>
+          <div class="field">
+            <label for="codigo-admin-input">Código de acesso</label>
+            <input type="text" id="codigo-admin-input" class="codigo-input" inputmode="numeric" autocomplete="off" required>
+          </div>
+          <button type="submit" class="btn" id="codigo-admin-submit">Entrar</button>
+        </form>
+      </div>
+    </section>
+
+    <section id="view-tutoriais" class="view" hidden>
+      <h1>Tutoriais</h1>
+      <p>Tudo que os professores já ensinaram.</p>
+      <div id="tutoriais-lista"></div>
+    </section>
+
+    <section id="view-perfil" class="view" hidden>
+      <h1>Minha conta</h1>
+      <div class="form-card">
+        <div id="perfil-message" class="form-message"></div>
+        <form id="perfil-form" novalidate>
+          <div class="field">
+            <label for="perfil-nome">Seu nome</label>
+            <input type="text" id="perfil-nome" maxlength="60" required>
+          </div>
+          <div class="field">
+            <label for="perfil-password">Nova senha</label>
+            <div class="password-field">
+              <input type="password" id="perfil-password" autocomplete="new-password">
+              <button type="button" data-toggle-senha="perfil-password" aria-label="Mostrar senha">Mostrar</button>
+            </div>
+            <p class="hint">Deixe em branco se não quiser trocar a senha.</p>
+          </div>
+          <button type="submit" class="btn" id="perfil-submit">Salvar alterações</button>
+        </form>
+      </div>
+      <div class="form-card" style="margin-top:1.5rem;">
+        <h3 style="margin-bottom:0.5rem;">Excluir minha conta</h3>
+        <p class="hint" style="margin-bottom:1rem;">Isso apaga sua conta e não pode ser desfeito.</p>
+        <button type="button" class="btn" id="perfil-btn-excluir" style="background:#b91c1c;">Excluir minha conta</button>
+      </div>
+    </section>
+
+    <section id="view-usuarios" class="view" hidden>
+      <span class="badge">Área do administrador</span>
+      <h1>Usuários</h1>
+      <p>Todo mundo que já criou conta no FacilitaTech.</p>
+      <div id="usuarios-lista"></div>
+    </section>
+
+    <section id="view-tutorial" class="view" hidden>
+      <span class="badge">Área do administrador</span>
+      <h1>Criar um novo tutorial</h1>
+      <div id="tutorial-message" class="form-message"></div>
+      <form id="novo-tutorial-form" novalidate>
+        <input type="text" id="tut-titulo" class="note-title-input" placeholder="Título do tutorial" required>
+        <textarea id="tut-descricao" class="note-content-textarea" placeholder="Descrição do tutorial" required></textarea>
+        <button type="submit" class="btn" id="tutorial-submit">Salvar tutorial</button>
+      </form>
+    </section>
+
+  </div>
+    </div>
+  </div>
+
+<script>
+// ============================================================
+// CONFIGURAÇÃO E COMUNICAÇÃO COM O BACK-END
+// ============================================================
+const API_BASE_URL = (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
+  ? "http://localhost:3000"
+  : "https://facilitatech.onrender.com";
+
+async function apiRequest(path, { method = "GET", body, auth = false } = {}) {
+  const headers = { "Content-Type": "application/json" };
+  if (auth) {
+    const token = localStorage.getItem("ft_token");
+    if (token) headers["Authorization"] = `Bearer ${token}`;
+  }
+  let response;
+  try {
+    response = await fetch(`${API_BASE_URL}${path}`, {
+      method, headers, body: body ? JSON.stringify(body) : undefined,
+    });
+  } catch (_) {
+    throw new Error("Não foi possível falar com o servidor. Verifique sua internet e tente novamente.");
+  }
+  let data = null;
+  try { data = await response.json(); } catch (_) {}
+  if (!response.ok) {
+    throw new Error((data && (data.message || data.error)) || "Algo deu errado. Tente novamente em instantes.");
+  }
+  return data;
+}
+
+// O AuthControllers.js real embrulha a resposta em { message, data }.
+// Por isso desempacotamos "data" aqui, uma vez só, em vez de espalhar
+// ".data.data" por todo o resto do código.
+async function loginUser(payload) {
+  const resposta = await apiRequest("/auth/login", { method: "POST", body: payload });
+  return resposta.data; // { user, token }
+}
+async function registerUser({ nome, password }) {
+  const resposta = await apiRequest("/auth/register", { method: "POST", body: { nome, password, role: "user" } });
+  return resposta.data; // { user, token } — já vem com token, não precisa logar de novo
+}
+
+async function entrarComCodigo(codigo) {
+  const resposta = await apiRequest("/Admin/codigo", { method: "POST", body: { codigo } });
+  return resposta; // { token, user }
+}
+async function createTutorial(payload) {
+  const resposta = await apiRequest("/Tutorial/create/tutorial", { method: "POST", body: payload, auth: true });
+  return resposta.data;
+}
+// GET /Tutorial/All/tutorial — devolve o array direto (sem envelope { data }).
+async function getTutoriais() {
+  return apiRequest("/Tutorial/All/tutorial", { auth: true });
+}
+async function editarTutorial(id, payload) {
+  const resposta = await apiRequest(`/Tutorial/update/tutorial/${id}`, { method: "PUT", body: payload, auth: true });
+  return resposta.data;
+}
+async function excluirTutorial(id) {
+  return apiRequest(`/Tutorial/delete/tutorial/${id}`, { method: "DELETE", auth: true });
+}
+// GET /Admin/usuarios — devolve o array direto (rota própria, sem envelope).
+async function getUsuarios() {
+  return apiRequest("/Admin/usuarios", { auth: true });
+}
+async function atualizarMeuPerfil(payload) {
+  const resposta = await apiRequest("/User/me", { method: "PUT", body: payload, auth: true });
+  return resposta.data;
+}
+async function excluirMinhaConta() {
+  return apiRequest("/User/me", { method: "DELETE", auth: true });
+}
+
+// ============================================================
+// SESSÃO: ler o token salvo, saber se é admin
+// ============================================================
+function decodeJwt(token) {
+  try {
+    const payload = token.split(".")[1];
+    return JSON.parse(atob(payload.replace(/-/g, "+").replace(/_/g, "/")));
+  } catch (_) { return null; }
+}
+function isAdmin() {
+  const token = localStorage.getItem("ft_token");
+  if (!token) return false;
+  const payload = decodeJwt(token);
+  return Boolean(payload && (payload.role === "admin" || payload.isAdmin === true));
+}
+
+// ============================================================
+// NAVEGAÇÃO ENTRE TELAS (tudo em uma página só, sem recarregar)
+// ============================================================
+function updateNav() {
+  const nav = document.getElementById("nav-area");
+  const token = localStorage.getItem("ft_token");
+  const nome = localStorage.getItem("ft_user_nome");
+  if (token) {
+    nav.innerHTML = `
+      <a href="#" data-view="view-tutoriais">Tutoriais</a>
+      ${isAdmin() ? '<a href="#" data-view="view-tutorial">Criar tutorial</a>' : ""}
+      ${isAdmin() ? '<a href="#" data-view="view-usuarios">Usuários</a>' : ""}
+      <a href="#" data-view="view-perfil">Minha conta</a>
+      <span style="padding:0.6rem 0.4rem; color:var(--color-text-soft);">Olá, ${nome ? nome.split(" ")[0] : "você"}</span>
+      <button type="button" class="sair-btn" id="nav-sair">Sair</button>
+    `;
+    document.getElementById("nav-sair").addEventListener("click", () => {
+      localStorage.removeItem("ft_token");
+      localStorage.removeItem("ft_user_id");
+      localStorage.removeItem("ft_user_nome");
+      localStorage.removeItem("ft_user_role");
+      showView("view-cadastro");
+    });
+  } else {
+    nav.innerHTML = `
+      <a href="#" data-view="view-cadastro">Criar conta</a>
+      <a href="#" data-view="view-codigo-admin">Sou admin</a>
+    `;
+  }
+  nav.querySelectorAll("a[data-view]").forEach((a) => {
+    a.addEventListener("click", (e) => {
+      e.preventDefault();
+      showView(a.dataset.view);
+      if (a.dataset.view === "view-tutoriais") carregarTutoriais();
+      if (a.dataset.view === "view-usuarios") carregarUsuarios();
+      if (a.dataset.view === "view-perfil") prepararPerfil();
+    });
+  });
+}
+
+function showView(name) {
+  document.querySelectorAll(".view").forEach((v) => { v.hidden = v.id !== name; });
+  document.querySelectorAll("#nav-area a[data-view]").forEach((a) => {
+    if (a.dataset.view === name) a.setAttribute("aria-current", "page");
+    else a.removeAttribute("aria-current");
+  });
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+document.querySelectorAll('a[data-view]').forEach((a) => {
+  a.addEventListener("click", (e) => { e.preventDefault(); showView(a.dataset.view); });
+});
+
+// ============================================================
+// BOTÃO A- / A+ (acessibilidade: aumentar/diminuir a letra)
+// ============================================================
+const FONT_SCALES = [1, 1.15, 1.3, 1.5, 1.7];
+const FONT_SCALE_KEY = "ft_font_scale_index";
+function applyFontScale(index) {
+  document.documentElement.style.setProperty("--font-scale", FONT_SCALES[index]);
+  localStorage.setItem(FONT_SCALE_KEY, index);
+  const label = document.getElementById("ft-font-scale-label");
+  if (label) label.textContent = `Letra ${Math.round(FONT_SCALES[index] * 100)}%`;
+}
+(function initTextSizeWidget() {
+  const widget = document.createElement("div");
+  widget.className = "text-size-widget";
+  widget.setAttribute("role", "group");
+  widget.setAttribute("aria-label", "Ajustar o tamanho da letra");
+  widget.innerHTML = `
+    <button type="button" id="ft-font-decrease" aria-label="Diminuir tamanho da letra">A-</button>
+    <span class="label" id="ft-font-scale-label">Letra 100%</span>
+    <button type="button" id="ft-font-increase" aria-label="Aumentar tamanho da letra">A+</button>
+  `;
+  document.body.appendChild(widget);
+  const saved = parseInt(localStorage.getItem(FONT_SCALE_KEY), 10);
+  let index = Number.isInteger(saved) && saved >= 0 && saved < FONT_SCALES.length ? saved : 0;
+  applyFontScale(index);
+  document.getElementById("ft-font-increase").addEventListener("click", () => {
+    index = Math.min(index + 1, FONT_SCALES.length - 1);
+    applyFontScale(index);
+  });
+  document.getElementById("ft-font-decrease").addEventListener("click", () => {
+    index = Math.max(index - 1, 0);
+    applyFontScale(index);
+  });
+})();
+
+// ============================================================
+// MOSTRAR / OCULTAR SENHA
+// ============================================================
+document.querySelectorAll("[data-toggle-senha]").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const input = document.getElementById(btn.dataset.toggleSenha);
+    const showing = input.type === "text";
+    input.type = showing ? "password" : "text";
+    btn.textContent = showing ? "Mostrar" : "Ocultar";
+    btn.setAttribute("aria-label", showing ? "Mostrar senha" : "Ocultar senha");
+  });
+});
+
+function mostrarBoasVindas(user) {
+  const nome = user?.nome || "você";
+  const ehAdmin = user?.role === "admin";
+  document.getElementById("bemvindo-nome").textContent = nome;
+  document.getElementById("bemvindo-avatar").textContent = nome.charAt(0).toUpperCase();
+  document.getElementById("bemvindo-badge").style.display = ehAdmin ? "inline-block" : "none";
+  document.getElementById("bemvindo-titulo").textContent = ehAdmin ? "Conta de admin criada!" : "Conta criada!";
+  document.getElementById("bemvindo-texto").textContent = ehAdmin
+    ? "Tudo pronto. Você já pode criar tutoriais."
+    : "Tudo pronto. Você já está conectado(a).";
+  document.getElementById("bemvindo-btn-tutorial").style.display = ehAdmin ? "inline-flex" : "none";
+}
+
+// ============================================================
+// FORMULÁRIOS: criar conta, entrar como admin, criar tutorial
+// ============================================================
+document.getElementById("cadastro-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const message = document.getElementById("cadastro-message");
+  const submitBtn = document.getElementById("cadastro-submit");
+  message.className = "form-message";
+  submitBtn.disabled = true;
+  submitBtn.textContent = "Criando conta...";
+  const avisoDemora = setTimeout(() => { submitBtn.textContent = "Ainda criando... o servidor está acordando"; }, 4000);
+  try {
+    const nome = document.getElementById("cad-nome").value.trim();
+    const password = document.getElementById("cad-password").value;
+
+    // Uma chamada só: o /auth/register já devolve o token de uma vez,
+    // não precisa mais chamar /auth/login em seguida.
+    const data = await registerUser({ nome, password });
+    clearTimeout(avisoDemora);
+
+    if (data.token) localStorage.setItem("ft_token", data.token);
+    if (data.user) {
+      if (data.user._id) localStorage.setItem("ft_user_id", data.user._id);
+      if (data.user.nome) localStorage.setItem("ft_user_nome", data.user.nome);
+      if (data.user.role) localStorage.setItem("ft_user_role", data.user.role);
+    }
+    updateNav();
+    document.getElementById("cadastro-form").reset();
+    mostrarBoasVindas(data.user);
+    showView("view-bemvindo");
+  } catch (err) {
+    clearTimeout(avisoDemora);
+    message.textContent = err.message;
+    message.className = "form-message show error";
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = "Criar minha conta";
+  }
+});
+
+document.getElementById("codigo-admin-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const message = document.getElementById("codigo-admin-message");
+  const submitBtn = document.getElementById("codigo-admin-submit");
+  message.className = "form-message";
+  submitBtn.disabled = true;
+  submitBtn.textContent = "Entrando...";
+  try {
+    const codigo = document.getElementById("codigo-admin-input").value.trim();
+    const data = await entrarComCodigo(codigo);
+    if (data.token) localStorage.setItem("ft_token", data.token);
+    if (data.user) {
+      if (data.user.nome) localStorage.setItem("ft_user_nome", data.user.nome);
+      if (data.user.role) localStorage.setItem("ft_user_role", data.user.role);
+    }
+    updateNav();
+    message.textContent = "Pronto! Entrando...";
+    message.className = "form-message show success";
+    document.getElementById("codigo-admin-form").reset();
+    showView("view-tutorial");
+  } catch (err) {
+    message.textContent = err.message;
+    message.className = "form-message show error";
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = "Entrar";
+  }
+});
+
+document.getElementById("novo-tutorial-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const message = document.getElementById("tutorial-message");
+  const submitBtn = document.getElementById("tutorial-submit");
+  message.className = "form-message";
+  submitBtn.disabled = true;
+  submitBtn.textContent = "Salvando...";
+  const avisoDemora = setTimeout(() => { submitBtn.textContent = "Ainda salvando... o servidor está acordando"; }, 4000);
+  try {
+    const payload = {
+      Title: document.getElementById("tut-titulo").value.trim(),
+      Description: document.getElementById("tut-descricao").value.trim(),
+    };
+    await createTutorial(payload);
+    clearTimeout(avisoDemora);
+    message.textContent = "Tutorial salvo com sucesso!";
+    message.className = "form-message show success";
+    document.getElementById("novo-tutorial-form").reset();
+  } catch (err) {
+    clearTimeout(avisoDemora);
+    message.textContent = err.message;
+    message.className = "form-message show error";
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = "Salvar tutorial";
+  }
+});
+
+// ============================================================
+// TUTORIAIS: listar (todo mundo vê); editar/excluir (só admin)
+// ============================================================
+function escapeHtml(texto) {
+  const div = document.createElement("div");
+  div.textContent = texto ?? "";
+  return div.innerHTML;
+}
+
+async function carregarTutoriais() {
+  const lista = document.getElementById("tutoriais-lista");
+  lista.innerHTML = '<p class="hint">Carregando...</p>';
+  try {
+    const tutoriais = await getTutoriais();
+    if (!Array.isArray(tutoriais) || tutoriais.length === 0) {
+      lista.innerHTML = '<p class="hint">Ainda não há tutoriais. Volte mais tarde.</p>';
+      return;
+    }
+    const admin = isAdmin();
+    lista.innerHTML = tutoriais.map((t) => `
+      <div class="form-card" style="margin-bottom:1rem;" data-tutorial-id="${t._id}">
+        <div class="tutorial-visualizacao">
+          <h3 style="margin-bottom:0.4rem;">${escapeHtml(t.Title)}</h3>
+          <p style="margin-bottom:${admin ? "0.8rem" : "0"};">${escapeHtml(t.Description)}</p>
+          ${admin ? `
+            <div style="display:flex; gap:1rem;">
+              <button type="button" class="btn-text btn-editar-tutorial">Editar</button>
+              <button type="button" class="btn-text btn-excluir-tutorial" style="color:#b91c1c;">Excluir</button>
+            </div>
+          ` : ""}
+        </div>
+        ${admin ? `
+          <div class="tutorial-edicao" style="display:none;">
+            <input type="text" class="edit-titulo note-title-input" value="${escapeHtml(t.Title)}" style="margin-bottom:0.6rem;">
+            <textarea class="edit-descricao note-content-textarea" style="min-height:120px; margin-bottom:0.6rem;">${escapeHtml(t.Description)}</textarea>
+            <div style="display:flex; gap:1rem;">
+              <button type="button" class="btn btn-salvar-edicao" style="width:auto; padding:0.6rem 1.2rem; min-height:auto;">Salvar</button>
+              <button type="button" class="btn-text btn-cancelar-edicao">Cancelar</button>
+            </div>
+          </div>
+        ` : ""}
+      </div>
+    `).join("");
+  } catch (err) {
+    lista.innerHTML = `<p class="form-message show error">${escapeHtml(err.message)}</p>`;
+  }
+}
+
+document.getElementById("tutoriais-lista").addEventListener("click", async (e) => {
+  const card = e.target.closest("[data-tutorial-id]");
+  if (!card) return;
+  const id = card.dataset.tutorialId;
+
+  if (e.target.classList.contains("btn-editar-tutorial")) {
+    card.querySelector(".tutorial-visualizacao").style.display = "none";
+    card.querySelector(".tutorial-edicao").style.display = "block";
+  } else if (e.target.classList.contains("btn-cancelar-edicao")) {
+    card.querySelector(".tutorial-visualizacao").style.display = "block";
+    card.querySelector(".tutorial-edicao").style.display = "none";
+  } else if (e.target.classList.contains("btn-salvar-edicao")) {
+    const titulo = card.querySelector(".edit-titulo").value.trim();
+    const descricao = card.querySelector(".edit-descricao").value.trim();
+    if (!titulo || !descricao) return;
+    e.target.disabled = true;
+    e.target.textContent = "Salvando...";
+    try {
+      await editarTutorial(id, { Title: titulo, Description: descricao });
+      await carregarTutoriais();
+    } catch (err) {
+      alert(err.message);
+      e.target.disabled = false;
+      e.target.textContent = "Salvar";
+    }
+  } else if (e.target.classList.contains("btn-excluir-tutorial")) {
+    if (!confirm("Excluir este tutorial? Essa ação não pode ser desfeita.")) return;
+    try {
+      await excluirTutorial(id);
+      await carregarTutoriais();
+    } catch (err) {
+      alert(err.message);
+    }
+  }
+});
+
+// ============================================================
+// USUÁRIOS (admin): listar
+// ============================================================
+async function carregarUsuarios() {
+  const lista = document.getElementById("usuarios-lista");
+  lista.innerHTML = '<p class="hint">Carregando...</p>';
+  try {
+    const usuarios = await getUsuarios();
+    if (!Array.isArray(usuarios) || usuarios.length === 0) {
+      lista.innerHTML = '<p class="hint">Nenhum usuário encontrado.</p>';
+      return;
+    }
+    lista.innerHTML = usuarios.map((u) => `
+      <div class="form-card" style="margin-bottom:0.8rem;">
+        <strong>${escapeHtml(u.nome)}</strong>
+        ${u.role === "admin" ? '<span class="badge" style="margin-left:0.6rem;">admin</span>' : ""}
+      </div>
+    `).join("");
+  } catch (err) {
+    lista.innerHTML = `<p class="form-message show error">${escapeHtml(err.message)}</p>`;
+  }
+}
+
+// ============================================================
+// PERFIL: atualizar meus dados, excluir minha conta
+// ============================================================
+function prepararPerfil() {
+  document.getElementById("perfil-nome").value = localStorage.getItem("ft_user_nome") || "";
+  document.getElementById("perfil-password").value = "";
+  document.getElementById("perfil-message").className = "form-message";
+}
+
+document.getElementById("perfil-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const message = document.getElementById("perfil-message");
+  const submitBtn = document.getElementById("perfil-submit");
+  message.className = "form-message";
+  submitBtn.disabled = true;
+  submitBtn.textContent = "Salvando...";
+  try {
+    const nome = document.getElementById("perfil-nome").value.trim();
+    const password = document.getElementById("perfil-password").value;
+    const payload = { nome };
+    if (password) payload.password = password;
+    const usuario = await atualizarMeuPerfil(payload);
+    if (usuario && usuario.nome) localStorage.setItem("ft_user_nome", usuario.nome);
+    updateNav();
+    document.getElementById("perfil-password").value = "";
+    message.textContent = "Dados atualizados com sucesso!";
+    message.className = "form-message show success";
+  } catch (err) {
+    message.textContent = err.message;
+    message.className = "form-message show error";
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = "Salvar alterações";
+  }
+});
+
+document.getElementById("perfil-btn-excluir").addEventListener("click", async () => {
+  if (!confirm("Excluir sua conta para sempre? Essa ação não pode ser desfeita.")) return;
+  try {
+    await excluirMinhaConta();
+    localStorage.removeItem("ft_token");
+    localStorage.removeItem("ft_user_id");
+    localStorage.removeItem("ft_user_nome");
+    localStorage.removeItem("ft_user_role");
+    updateNav();
+    showView("view-cadastro");
+  } catch (err) {
+    alert(err.message);
+  }
+});
+
+// ============================================================
+// INICIALIZAÇÃO: monta o menu certo e mostra a tela inicial certa
+// ============================================================
+updateNav();
+if (localStorage.getItem("ft_token")) {
+  showView("view-tutoriais");
+  carregarTutoriais();
+} else {
+  showView("view-cadastro");
+}
+</script>
+</body>
+</html>
