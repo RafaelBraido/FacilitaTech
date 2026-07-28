@@ -1,12 +1,4 @@
-
 import UserServices from "../Services/UserServices.js";
-
-// Antes: só devolvia { message: "..." } sem chamar o UserServices nem
-// mexer no banco — o usuário nunca era realmente atualizado ou excluído.
-// Agora chama o Service de verdade, usando o id de quem está logado
-// Confirmado no authMiddleware.js real: ele faz req.user = usuário do
-// banco (User.findById), então req.user.id funciona (getter virtual do
-// Mongoose para o _id). Nada a ajustar aqui.
 
 const updateMe = async (req, res, next) => {
   try {

@@ -1,5 +1,3 @@
-
-
 import express from "express";
 import authController from "../Controllers/AuthControllers.js";
 import rateLimitAuth from "../Middlewares/Ratelimitauth.js";

@@ -1,10 +1,7 @@
-
 import User from "../Models/User.js";
-
 
 const updateMe = async (updateData) => {
   const { id, ...camposParaAtualizar } = updateData;
-  // Ninguém deve conseguir se promover a admin editando o próprio perfil.
   delete camposParaAtualizar.role;
   delete camposParaAtualizar.active;
 

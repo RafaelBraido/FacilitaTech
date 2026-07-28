@@ -1,4 +1,3 @@
-
 import Tutorial from "../Models/Tutorial.js";
 
 const createTutorial = async (data) => {
@@ -16,9 +15,6 @@ const createTutorial = async (data) => {
   });
 };
 
-// Antes: chamava TutorialController.deleteTutorial(tutorialId), o que
-// criava uma chamada circular (Controller -> Service -> Controller -> ...).
-// Agora: mexe direto no model, como as outras funções deste arquivo já fazem.
 const deleteTutorial = async (tutorialId) => {
   if (!tutorialId) {
     const error = new Error("Informe o id do tutorial");
@@ -37,8 +33,6 @@ const deleteTutorial = async (tutorialId) => {
   return tutorial;
 };
 
-// Antes: validava Title/Description mas nunca salvava nada (faltava o
-// findByIdAndUpdate). Agora atualiza de verdade e devolve o tutorial atualizado.
 const updateTutorial = async (tutorialId, data) => {
   const { Title, Description } = data;
 

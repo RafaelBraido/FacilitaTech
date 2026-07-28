@@ -1,11 +1,11 @@
 const adminMiddleware = (req, res, next) => {
-  if (req.user.role !== "admin") {
+  if (!req.user || req.user.role !== "admin") {
     return res.status(403).json({ 
-        error: "Acesso restrito a administradores."
-     });
+      error: "Acesso restrito a administradores."
+    });
   }
 
-    next();
+  next();
 };
 
 export default adminMiddleware;

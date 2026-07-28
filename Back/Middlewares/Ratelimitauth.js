@@ -1,4 +1,3 @@
-
 const LIMITE_TENTATIVAS = 10;
 const JANELA_MS = 15 * 60 * 1000; // 15 minutos
 
@@ -12,7 +11,7 @@ function limparAntigos() {
 }
 
 export default function rateLimitAuth(req, res, next) {
-  const ip = req.ip || req.connection?.remoteAddress || "desconhecido";
+  const ip = req.headers["x-forwarded-for"]?.split(",")[0] || req.ip || req.connection?.remoteAddress || "desconhecido";
   const agora = Date.now();
 
   limparAntigos();

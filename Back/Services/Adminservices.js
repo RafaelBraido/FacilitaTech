@@ -1,4 +1,3 @@
-
 import crypto from "crypto";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
@@ -16,7 +15,6 @@ function gerarToken(user) {
 }
 
 const AdminService = {
-  // ---------- Entrar como admin só com um código, sem e-mail/conta ----------
   async entrarComCodigo(codigo) {
     const codigoCorreto = process.env.ADMIN_CODE || "1234";
 
@@ -26,9 +24,6 @@ const AdminService = {
       throw error;
     }
 
-    // O authMiddleware exige um usuário de verdade por trás do token.
-    // Por isso criamos (uma vez só) um usuário reservado "Administrador"
-    // — ninguém faz login nele por senha, só por este código.
     let adminUser = await User.findOne({ nome: NOME_ADMIN_CODIGO });
 
     if (!adminUser) {
@@ -41,8 +36,6 @@ const AdminService = {
         active: true,
       });
     } else if (adminUser.role !== "admin" || !adminUser.active) {
-      // Defesa extra: garante que continua admin/ativo mesmo se alguém
-      // mexer nesse usuário manualmente no banco.
       adminUser.role = "admin";
       adminUser.active = true;
       await adminUser.save();
@@ -53,8 +46,6 @@ const AdminService = {
       user: { nome: adminUser.nome, role: adminUser.role },
     };
   },
-
-  // ---------- Funções extras para o admin ----------
 
   async listarUsuarios() {
     return User.find({}, "nome role createdAt").sort({ createdAt: -1 });

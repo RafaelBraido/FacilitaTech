@@ -1,4 +1,3 @@
-
 import TutorialService from "../Services/TutorialServices.js";
 
 const createTutorial = async (req, res, next) => {
@@ -23,8 +22,6 @@ const deleteTutorial = async (req, res, next) => {
       message: "Tutorial deletado com sucesso",
     });
   } catch (error) {
-    // Antes: catch vazio — se desse erro, a requisição nunca respondia
-    // (ficava pendurada até o navegador desistir). Agora encaminha o erro.
     next(error);
   }
 };
@@ -39,7 +36,6 @@ const updateTutorial = async (req, res, next) => {
       data: updatedTutorial,
     });
   } catch (error) {
-    // Mesmo problema do deleteTutorial: catch vazio corrigido.
     next(error);
   }
 };

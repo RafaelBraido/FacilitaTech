@@ -1,7 +1,7 @@
 import express from "express";
 import AdminController from "../Controllers/AdminControllers.js";
 import authMiddleware from "../Middlewares/authMiddleware.js";
-import adminMiddleware from "../Middlewares/adminMiddleware.js"; // Corrigido para adminMiddleware.js
+import adminMiddleware from "../Middlewares/adminMiddlewares.js";  
 import rateLimitAuth from "../Middlewares/Ratelimitauth.js";
 
 const router = express.Router();

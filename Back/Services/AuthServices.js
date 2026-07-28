@@ -1,4 +1,3 @@
-
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import User from "../Models/User.js";
@@ -34,7 +33,6 @@ const register = async (data) => {
   const password = String(data.password || "");
   const { telefone, idade, role } = data;
 
-  // ---------- Validação (defesa em profundidade — o front já valida também) ----------
   if (!nome || !password) {
     const error = new Error("Nome e senha são obrigatórios");
     error.statusCode = 400;
@@ -51,8 +49,6 @@ const register = async (data) => {
     throw error;
   }
 
-  // Sem e-mail para checar duplicidade, o "nome" vira o identificador de
-  // login — por isso precisa ser único (evita login entrar na conta errada).
   const nomeJaExiste = await User.findOne({ nome });
   if (nomeJaExiste) {
     const error = new Error("Esse nome já está em uso. Tente outro (por exemplo, com o sobrenome).");
@@ -90,8 +86,6 @@ const login = async (data) => {
 
   const user = await User.findOne({ nome }).select("+password");
 
-  // Mensagem genérica de propósito: não revela se o problema foi o nome
-  // ou a senha, para dificultar tentativa-e-erro.
   if (!user) {
     const error = new Error("Nome ou senha inválidos");
     error.statusCode = 401;

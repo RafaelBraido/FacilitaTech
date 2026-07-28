@@ -1,8 +1,7 @@
-
-import AdminService from "../Services/AdminService.js";
+import AdminService from "../Services/Adminservices.js";
 
 const AdminController = {
-  async entrarComCodigo(req, res) {
+  async entrarComCodigo(req, res, next) {
     try {
       const { codigo } = req.body;
       const resultado = await AdminService.entrarComCodigo(codigo);
@@ -12,16 +11,16 @@ const AdminController = {
     }
   },
 
-  async listarUsuarios(req, res) {
+  async listarUsuarios(req, res, next) {
     try {
       const usuarios = await AdminService.listarUsuarios();
       res.json(usuarios);
     } catch (error) {
-      res.status(500).json({ message: error.message });
+      next(error);
     }
   },
 
-  async promoverParaAdmin(req, res) {
+  async promoverParaAdmin(req, res, next) {
     try {
       const { nome } = req.body;
       const usuario = await AdminService.promoverParaAdmin(nome);
@@ -31,7 +30,7 @@ const AdminController = {
     }
   },
 
-  async rebaixarAdmin(req, res) {
+  async rebaixarAdmin(req, res, next) {
     try {
       const { nome } = req.body;
       const usuario = await AdminService.rebaixarAdmin(nome);
@@ -41,12 +40,12 @@ const AdminController = {
     }
   },
 
-  async estatisticas(req, res) {
+  async estatisticas(req, res, next) {
     try {
       const stats = await AdminService.estatisticas();
       res.json(stats);
     } catch (error) {
-      res.status(500).json({ message: error.message });
+      next(error);
     }
   },
 };
