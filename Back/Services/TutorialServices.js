@@ -1,11 +1,4 @@
-/**
- * TutorialServices.js
- * -------------------
- * Regra de negócio dos tutoriais: criar, excluir, atualizar e listar.
- * Cada tutorial tem só dois campos hoje: Title e Description (ver
- * Models/Tutorial.js). Todas as funções aqui mexem direto no model —
- * nenhuma chama Controllers (isso já foi um bug corrigido, ver histórico).
- */
+
 import Tutorial from "../Models/Tutorial.js";
 
 const createTutorial = async (data) => {

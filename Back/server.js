@@ -1,16 +1,4 @@
-/**
- * server.js
- * ---------
- * Ponto de entrada do back-end. Monta as rotas, conecta no banco e
- * sobe o servidor.
- *
- * Ordem importa aqui:
- *   1) middlewares gerais (cors, compressão, leitura de JSON)
- *   2) rotas
- *   3) middleware de erro (tem que vir por último — Express só
- *      reconhece como "tratador de erro" uma função com 4 argumentos
- *      (err, req, res, next), registrada depois de tudo)
- */
+
 import express from "express";
 import dotenv from "dotenv";
 import compression from "compression";

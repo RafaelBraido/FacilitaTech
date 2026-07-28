@@ -1,15 +1,3 @@
-/**
- * rateLimitAuth.js
- * ----------------
- * Limite simples de tentativas para /auth/register e /auth/login, para
- * dificultar ataques de força bruta (tentar muitas senhas seguidas).
- *
- * Guarda as tentativas em memória (por IP). Isso é suficiente para um
- * servidor único (como no Render, plano free). Se um dia o back-end
- * rodar em mais de uma instância ao mesmo tempo, cada instância teria
- * sua própria contagem — nesse caso, o ideal seria mover isso para o
- * Redis ou outro armazenamento compartilhado.
- */
 
 const LIMITE_TENTATIVAS = 10;
 const JANELA_MS = 15 * 60 * 1000; // 15 minutos

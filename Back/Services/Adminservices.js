@@ -1,26 +1,4 @@
-/**
- * AdminService.js
- * ---------------
- * Duas responsabilidades:
- *  1) Login de admin só com um código fixo (sem e-mail/conta) — para
- *     entrar rápido e criar tutoriais.
- *  2) Funções de gestão (listar usuários, promover/rebaixar admin,
- *     estatísticas) — usadas por quem já é admin.
- *
- * ⚠️ IMPORTANTE (bug corrigido nesta versão): o authMiddleware.js real
- * faz `User.findById(decoded.id)` — ou seja, TODO token precisa apontar
- * para um usuário de verdade no banco, senão a requisição é barrada com
- * "Usuário não encontrado" antes mesmo de chegar no adminMiddleware.
- * A versão anterior deste arquivo gerava um token sem "id" (só
- * { role: "admin" }), o que quebrava qualquer rota protegida — incluindo
- * criar tutorial. Agora, entrar com código cria (uma vez só) ou reaproveita
- * um usuário real chamado "Administrador" no banco, e o token aponta
- * para o _id desse usuário.
- *
- * Como o sistema não usa mais e-mail, promover/rebaixar busca o usuário
- * por "nome" (único, ver Models/User.js) — o e-mail interno é gerado
- * sozinho e ninguém sabe qual é.
- */
+
 import crypto from "crypto";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
@@ -40,7 +18,7 @@ function gerarToken(user) {
 const AdminService = {
   // ---------- Entrar como admin só com um código, sem e-mail/conta ----------
   async entrarComCodigo(codigo) {
-    const codigoCorreto = process.env.ADMIN_CODE || "121728";
+    const codigoCorreto = process.env.ADMIN_CODE || "1234";
 
     if (String(codigo || "").trim() !== codigoCorreto) {
       const error = new Error("Código incorreto.");

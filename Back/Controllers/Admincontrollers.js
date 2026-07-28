@@ -1,12 +1,4 @@
-/**
- * AdminControllers.js
- * -------------------
- *   POST /Admin/codigo        { codigo }  — público, é a porta de entrada do admin
- *   GET  /Admin/usuarios                  — admin only
- *   PUT  /Admin/promover      { nome }    — admin only
- *   PUT  /Admin/rebaixar      { nome }    — admin only
- *   GET  /Admin/estatisticas              — admin only
- */
+
 import AdminService from "../Services/AdminService.js";
 
 const AdminController = {

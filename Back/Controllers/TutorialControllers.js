@@ -1,10 +1,4 @@
-/**
- * TutorialControllers.js
- * ----------------------
- * Recebe a requisição HTTP, chama o TutorialServices, e devolve a
- * resposta em JSON no formato { message, data }. Erros vão para
- * next(error), que cai no middleware de erro central (ver server.js).
- */
+
 import TutorialService from "../Services/TutorialServices.js";
 
 const createTutorial = async (req, res, next) => {

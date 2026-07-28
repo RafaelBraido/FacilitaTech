@@ -1,9 +1,4 @@
-/**
- * UserControllers.js
- * ------------------
- * Perfil do usuário logado (atualizar/excluir a própria conta) e,
- * para admin, listar todos os usuários.
- */
+
 import UserServices from "../Services/UserServices.js";
 
 // Antes: só devolvia { message: "..." } sem chamar o UserServices nem

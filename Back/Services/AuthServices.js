@@ -1,20 +1,3 @@
-/**
- * AuthServices.js
- * ---------------
- * Regra de negócio de autenticação: criar conta e entrar.
- *
- * Decisões importantes (documentadas para quem for mexer depois):
- * - Não existe e-mail no cadastro: só "nome" e "password". O model
- *   User.js ainda tem "email" como obrigatório/único no banco, então
- *   geramos um valor interno único por trás — a pessoa nunca vê isso.
- * - Como não há e-mail, o login é feito por "nome". Por isso o "nome"
- *   agora também precisa ser único (checado abaixo em register) — sem
- *   isso, duas contas com o mesmo nome fariam o login entrar na conta
- *   errada.
- * - O registro já devolve o token de login (igual o login normal),
- *   assim o front não precisa fazer duas chamadas para "criar conta e
- *   já entrar".
- */
 
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";

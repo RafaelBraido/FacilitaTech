@@ -1,10 +1,4 @@
-/**
- * Auth.js (model)
- * ---------------
- * ⚠️ Este model não parece ser usado por nenhum arquivo do projeto —
- * o AuthServices.js usa "Models/User.js", não este. Mantido sem
- * alterações; confirme se ainda é necessário antes de apagar.
- */
+
 import mongoose from "mongoose";
 
 const AuthSchema = new mongoose.Schema(
