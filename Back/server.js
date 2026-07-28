@@ -5,7 +5,7 @@ import cors from "cors";
 import UserRoutes from "./Routes/UserRoutes.js";
 import AuthRoutes from "./Routes/AuthRoutes.js";
 import TutorialRoutes from "./Routes/TutorialRoutes.js";
-// import AdminRoutes from "./Routes/AdminRoutes.js";
+ import AdminRoutes from "./Routes/AdminRoutes.js";
 dotenv.config();
 
 
@@ -22,7 +22,7 @@ app.get("/das", (req, res) => {
 app.use("/User", UserRoutes);
 app.use("/auth", AuthRoutes)
 app.use("/Tutorial", TutorialRoutes);
-
+app.use("/Admin", AdminRoutes);
 const startServer = async () => {
   try {
     await connectDB();
