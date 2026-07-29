@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FacilitaTech</title>
-<meta name="description" content="Crie sua conta e comece a aprender tecnologia no seu tempo.">
+<title>Entrar - FacilitaTech</title>
+<meta name="description" content="Acesse sua conta no FacilitaTech.">
 <style>
 :root {
   --color-bg: #f3f4f6;
@@ -27,164 +27,44 @@
   --radius-md: 0.4rem;
   --shadow: 0 10px 30px rgba(0,0,0,0.12);
 }
-
 * { box-sizing: border-box; }
 html { font-size: calc(16px * var(--font-scale)); }
-body {
-  margin: 0;
-  font-family: var(--font-body);
-  background: var(--color-bg);
-  color: var(--color-text);
-  line-height: 1.6;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+body { margin: 0; font-family: var(--font-body); background: var(--color-bg); color: var(--color-text); line-height: 1.6; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
 h1 { font-family: var(--font-display); color: var(--color-text); font-size: 1.7rem; font-weight: 700; margin: 0 0 0.4em; }
 p { margin: 0 0 1em; }
 a { color: var(--color-primary); }
-
-a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
-  outline: 3px solid var(--color-focus);
-  outline-offset: 3px;
-  border-radius: 4px;
-}
-.skip-link {
-  position: absolute; left: -9999px; top: 0;
-  background: var(--color-primary-dark); color: #fff;
-  padding: 0.9rem 1.2rem; border-radius: 0 0 var(--radius-md) 0; z-index: 1000; font-weight: 700;
-}
+a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 3px; border-radius: 4px; }
+.skip-link { position: absolute; left: -9999px; top: 0; background: var(--color-primary-dark); color: #fff; padding: 0.9rem 1.2rem; border-radius: 0 0 var(--radius-md) 0; z-index: 1000; font-weight: 700; }
 .skip-link:focus { left: 0; }
-
 .card { display: flex; width: 100%; max-width: 64rem; background: var(--color-surface); border-radius: var(--radius-lg); box-shadow: var(--shadow); overflow: hidden; margin: 1rem; }
-.brand {
-  width: 38%; background: var(--color-primary); color: #fff;
-  display: flex; flex-direction: column; justify-content: center; align-items: center;
-  padding: 2.5rem; text-align: center; flex-shrink: 0;
-}
+.brand { width: 38%; background: var(--color-primary); color: #fff; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 2.5rem; text-align: center; flex-shrink: 0; }
 .brand .logo { display: flex; align-items: center; gap: 0.5rem; font-size: 1.6rem; font-weight: 700; margin-bottom: 0.5rem; }
 .brand p { font-size: 1rem; opacity: 0.9; }
 .content-side { flex: 1; padding: 2rem 2.5rem; max-height: 92vh; overflow-y: auto; min-width: 0; }
-
-#nav-area { display: flex; align-items: center; justify-content: flex-end; gap: 0.3rem; flex-wrap: wrap; margin-bottom: 1rem; }
-#nav-area a, #nav-area button {
-  font-family: var(--font-body); font-weight: 700; font-size: 0.9rem;
-  background: none; border: none; color: var(--color-text-soft); cursor: pointer;
-  padding: 0.5rem 0.8rem; border-radius: var(--radius-md); text-decoration: none;
-  transition: background 0.15s ease;
-}
-#nav-area a:hover, #nav-area button:hover { background: var(--color-primary-soft); }
-#nav-area a[aria-current="page"] { background: var(--color-primary-soft); color: var(--color-primary-dark); }
-#nav-area .sair-btn { border: 1px solid var(--color-primary); color: var(--color-primary-dark); }
-
 .container-narrow { max-width: 420px; margin: 0 auto; padding: 0; }
-.view[hidden] { display: none; }
-
-.badge {
-  display: inline-block; font-size: 0.85rem; font-weight: 700;
-  padding: 0.3rem 0.8rem; border-radius: 999px;
-  background: var(--color-success-soft); color: var(--color-success);
-  width: fit-content; margin-bottom: 0.8rem;
-}
-
-.form-card { padding: 0; }
 .field { margin-bottom: 1rem; }
 .field label { display: block; font-size: 0.9rem; font-weight: 700; color: #374151; margin-bottom: 0.4rem; }
-.field input, .field textarea {
-  width: 100%; font-family: var(--font-body); font-size: 1rem;
-  padding: 0.6rem 1rem; border: 1px solid var(--color-border); border-radius: var(--radius-md);
-  background: #fff; color: var(--color-text);
-}
-.field input:focus, .field textarea:focus { border-color: var(--color-primary); outline: none; box-shadow: 0 0 0 2px var(--color-primary-soft); }
-.field input.codigo-input { font-size: 1.8rem; letter-spacing: 0.5rem; text-align: center; font-weight: 700; }
+.field input { width: 100%; font-family: var(--font-body); font-size: 1rem; padding: 0.6rem 1rem; border: 1px solid var(--color-border); border-radius: var(--radius-md); background: #fff; color: var(--color-text); }
+.field input:focus { border-color: var(--color-primary); outline: none; box-shadow: 0 0 0 2px var(--color-primary-soft); }
 .password-field { position: relative; }
-.password-field button {
-  position: absolute; right: 0.6rem; top: 50%; transform: translateY(-50%);
-  background: none; border: none; font-weight: 700; color: var(--color-primary); cursor: pointer;
-  padding: 0.3rem 0.5rem; font-size: 0.9rem;
-}
-.hint { font-size: 0.85rem; color: var(--color-text-soft); margin-top: 0.35rem; }
-
-.btn {
-  display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;
-  font-family: var(--font-body); font-size: 1.1rem; font-weight: 700;
-  padding: 0.85rem 1.2rem; border-radius: var(--radius-md); border: 2px solid transparent;
-  cursor: pointer; text-decoration: none; min-height: 48px; width: 100%;
-  background: var(--color-accent); color: #fff;
-  transition: background 0.15s ease;
-}
+.password-field input { padding-right: 4.5rem; }
+.password-field button { position: absolute; right: 0.6rem; top: 50%; transform: translateY(-50%); background: none; border: none; font-weight: 700; color: var(--color-primary); cursor: pointer; padding: 0.3rem 0.5rem; font-size: 0.9rem; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem; font-family: var(--font-body); font-size: 1.1rem; font-weight: 700; padding: 0.85rem 1.2rem; border-radius: var(--radius-md); border: 2px solid transparent; cursor: pointer; text-decoration: none; min-height: 48px; width: 100%; background: var(--color-accent); color: #fff; transition: background 0.15s ease; }
 .btn:hover { background: var(--color-accent-dark); }
-.btn:active { transform: scale(0.98); }
 .btn:disabled { opacity: 0.7; cursor: not-allowed; }
-.btn-text {
-  background: none; border: none; color: var(--color-primary); font-weight: 700;
-  font-family: var(--font-body); font-size: 0.95rem; cursor: pointer; padding: 0.5rem; width: auto;
-  min-height: auto; text-decoration: underline;
-}
-.form-links { margin-top: 1.5rem; text-align: center; font-size: 0.95rem; }
-.form-links a { font-weight: 700; text-decoration: none; }
-
 .form-message { border-radius: var(--radius-md); padding: 0.75rem 1rem; margin-bottom: 1rem; font-weight: 700; font-size: 0.9rem; display: none; }
 .form-message.show { display: block; }
 .form-message.error { background: #fee2e2; color: #b91c1c; }
 .form-message.success { background: var(--color-success-soft); color: var(--color-success); }
-
-.text-size-widget {
-  position: fixed; right: 1.2rem; bottom: 1.2rem;
-  background: var(--color-surface); border: 2px solid var(--color-primary);
-  border-radius: 999px; box-shadow: var(--shadow);
-  display: flex; align-items: center; gap: 0.3rem; padding: 0.4rem; z-index: 200;
-}
-.text-size-widget button {
-  width: 42px; height: 42px; border-radius: 50%; border: none;
-  background: var(--color-primary-soft); color: var(--color-primary-dark);
-  font-weight: 700; font-size: 1rem; cursor: pointer;
-}
+.text-size-widget { position: fixed; right: 1.2rem; bottom: 1.2rem; background: var(--color-surface); border: 2px solid var(--color-primary); border-radius: 999px; box-shadow: var(--shadow); display: flex; align-items: center; gap: 0.3rem; padding: 0.4rem; z-index: 200; }
+.text-size-widget button { width: 42px; height: 42px; border-radius: 50%; border: none; background: var(--color-primary-soft); color: var(--color-primary-dark); font-weight: 700; font-size: 1rem; cursor: pointer; }
 .text-size-widget button:hover { background: var(--color-primary); color: #fff; }
 .text-size-widget .label { font-size: 0.75rem; font-weight: 700; color: var(--color-text-soft); padding: 0 0.4rem; white-space: nowrap; }
-@media (max-width: 520px) { .text-size-widget .label { display: none; } }
-.passo-oculto { display: none; }
-.note-title-input {
-  display: block; width: 100%; font-family: var(--font-body);
-  font-size: 1.3rem; font-weight: 700; color: var(--color-text);
-  padding: 1rem 1.1rem; border: 2px solid var(--color-border);
-  border-radius: var(--radius-md); margin-bottom: 1rem; background: #fff;
-}
-.note-title-input::placeholder { color: #9ca3af; font-weight: 700; }
-.note-title-input:focus {
-  outline: none; border-color: var(--color-focus);
-  box-shadow: 0 0 0 3px var(--color-primary-soft);
-}
-.note-content-textarea {
-  display: block; width: 100%; min-height: 260px; font-family: var(--font-body);
-  font-size: 1.05rem; line-height: 1.6; color: var(--color-text);
-  padding: 1rem 1.1rem; border: 1px solid var(--color-border);
-  border-radius: var(--radius-md); margin-bottom: 1.2rem; background: #fff;
-  resize: vertical;
-}
-.note-content-textarea::placeholder { color: #9ca3af; }
-.note-content-textarea:focus {
-  outline: none; border-color: var(--color-focus);
-  box-shadow: 0 0 0 3px var(--color-primary-soft);
-}
-.profile-avatar-letra {
-  width: 64px; height: 64px; border-radius: 50%; margin: 0 auto;
-  background: var(--color-primary); color: #fff;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.5rem; font-weight: 700;
-}
-@media (max-width: 700px) {
-  .card { flex-direction: column; max-width: 30rem; }
-  .brand { width: 100%; padding: 1.5rem; }
-  .content-side { padding: 1.5rem; max-height: none; }
-}
+@media (max-width: 700px) { .card { flex-direction: column; max-width: 30rem; } .brand { width: 100%; padding: 1.5rem; } .content-side { padding: 1.5rem; max-height: none; } }
 </style>
 </head>
 <body>
-
 <a href="#conteudo-principal" class="skip-link">Pular para o conteúdo</a>
-
 <div class="card">
   <div class="brand">
     <span class="logo">
@@ -195,761 +75,170 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     </span>
     <p>Tutoriais simples de tecnologia, no seu tempo</p>
   </div>
-
   <div class="content-side" id="conteudo-principal">
-    <nav id="nav-area" aria-label="Menu principal"></nav>
     <div class="container-narrow">
-
-    <section id="view-cadastro" class="view">
-      <h1>Criar sua conta</h1>
-      <p>Só nome e senha. Rapidinho.</p>
-      <div class="form-card">
-        <div id="cadastro-message" class="form-message"></div>
-        <form id="cadastro-form" novalidate>
-          <div class="field">
-            <label for="cad-nome">Seu nome</label>
-            <input type="text" id="cad-nome" autocomplete="name" maxlength="60" required>
+      <h1>Entrar na sua conta</h1>
+      <p>Digite seu nome e sua senha para continuar.</p>
+      <div id="login-message" class="form-message"></div>
+      <form id="login-form" novalidate>
+        <div class="field">
+          <label for="login-nome">Seu nome</label>
+          <input id="login-nome" type="text" autocomplete="username" maxlength="60" required autofocus>
+        </div>
+        <div class="field">
+          <label for="login-password">Sua senha</label>
+          <div class="password-field">
+            <input id="login-password" type="password" autocomplete="current-password" required>
+            <button type="button" id="toggle-senha" aria-label="Mostrar senha">Mostrar</button>
           </div>
-          <div class="field">
-            <label for="cad-password">Crie uma senha</label>
-            <div class="password-field">
-              <input type="password" id="cad-password" autocomplete="new-password" required>
-              <button type="button" data-toggle-senha="cad-password" aria-label="Mostrar senha">Mostrar</button>
-            </div>
-          </div>
-          <button type="submit" class="btn" id="cadastro-submit">Criar minha conta</button>
-        </form>
-        <p class="form-links">Já tem uma conta? <a href="login.html">Entrar na sua conta</a></p>
-      </div>
-    </section>
-
-
-    <section id="view-codigo-admin" class="view" hidden>
-      <h1>Entrar como admin</h1>
-      <p>Digite o código de acesso. Não precisa de e-mail nem conta.</p>
-      <div class="form-card">
-        <div id="codigo-admin-message" class="form-message"></div>
-        <form id="codigo-admin-form" novalidate>
-          <div class="field">
-            <label for="codigo-admin-input">Código de acesso</label>
-            <input type="text" id="codigo-admin-input" class="codigo-input" inputmode="numeric" autocomplete="off" required>
-          </div>
-          <button type="submit" class="btn" id="codigo-admin-submit">Entrar</button>
-        </form>
-      </div>
-    </section>
-
-    <section id="view-tutoriais" class="view" hidden>
-      <h1>Tutoriais</h1>
-      <p>Tudo que os professores já ensinaram.</p>
-      <div id="tutoriais-lista"></div>
-    </section>
-
-    <section id="view-perfil" class="view" hidden>
-      <h1>Minha conta</h1>
-      <div class="form-card">
-        <div id="perfil-message" class="form-message"></div>
-        <form id="perfil-form" novalidate>
-          <div class="field">
-            <label for="perfil-nome">Seu nome</label>
-            <input type="text" id="perfil-nome" maxlength="60" required>
-          </div>
-          <div class="field">
-            <label for="perfil-password">Nova senha</label>
-            <div class="password-field">
-              <input type="password" id="perfil-password" autocomplete="new-password">
-              <button type="button" data-toggle-senha="perfil-password" aria-label="Mostrar senha">Mostrar</button>
-            </div>
-            <p class="hint">Deixe em branco se não quiser trocar a senha.</p>
-          </div>
-          <button type="submit" class="btn" id="perfil-submit">Salvar alterações</button>
-        </form>
-      </div>
-      <div class="form-card" style="margin-top:1.5rem;">
-        <h3 style="margin-bottom:0.5rem;">Excluir minha conta</h3>
-        <p class="hint" style="margin-bottom:1rem;">Isso apaga sua conta e não pode ser desfeito.</p>
-        <button type="button" class="btn" id="perfil-btn-excluir" style="background:#b91c1c;">Excluir minha conta</button>
-      </div>
-    </section>
-
-    <section id="view-usuarios" class="view" hidden>
-      <span class="badge">Área do administrador</span>
-      <h1>Usuários</h1>
-      <p>Todo mundo que já criou conta no FacilitaTech.</p>
-      <div id="usuarios-lista"></div>
-    </section>
-
-    <section id="view-tutorial" class="view" hidden>
-      <span class="badge">Área do administrador</span>
-      <h1>Criar um novo tutorial</h1>
-      <div id="tutorial-message" class="form-message"></div>
-      <form id="novo-tutorial-form" novalidate>
-        <input type="text" id="tut-titulo" class="note-title-input" placeholder="Título do tutorial" required>
-        <textarea id="tut-descricao" class="note-content-textarea" placeholder="Descrição do tutorial" required></textarea>
-        <button type="submit" class="btn" id="tutorial-submit">Salvar tutorial</button>
+        </div>
+        <button type="submit" id="login-submit" class="btn">Entrar</button>
       </form>
-    </section>
-
-  </div>
+      <p style="margin-top: 1.5rem; text-align: center; font-size: 0.95rem;">Ainda não tem uma conta? <a href="index.html">Criar conta</a></p>
     </div>
   </div>
+</div>
 
 <script>
-// ============================================================
-// CONFIGURAÇÃO E COMUNICAÇÃO COM O BACK-END
-// ============================================================
-const API_BASE_URL = (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
-  ? "http://localhost:3000"
-  : "https://facilitatech.onrender.com";
-const LOCAL_USERS_KEY = "ft_local_users";
-const LOCAL_TUTORIALS_KEY = "ft_local_tutorials";
-const LOCAL_SESSION_KEY = "ft_session_source";
+  const API_BASE_URL = (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
+    ? "http://localhost:3000"
+    : "https://facilitatech.onrender.com";
+  const LOCAL_USERS_KEY = "ft_local_users";
+  const LOCAL_SESSION_KEY = "ft_session_source";
 
-function normalizePayload(response) {
-  return response && typeof response === "object" && "data" in response ? response.data : response;
-}
-
-function base64UrlEncode(value) {
-  return btoa(JSON.stringify(value)).replace(/=/g, "").replace(/\+/g, "-").replace(/\//g, "_");
-}
-
-function createLocalToken(role) {
-  return `${base64UrlEncode({ alg: "none", typ: "JWT" })}.${base64UrlEncode({ role, local: true, exp: Math.floor(Date.now() / 1000) + 86400 })}.local`;
-}
-
-function getLocalUsers() {
-  try { return JSON.parse(localStorage.getItem(LOCAL_USERS_KEY)) || []; } catch (_) { return []; }
-}
-
-function saveLocalUsers(users) {
-  localStorage.setItem(LOCAL_USERS_KEY, JSON.stringify(users));
-}
-
-function getLocalTutorials() {
-  try { return JSON.parse(localStorage.getItem(LOCAL_TUTORIALS_KEY)) || []; } catch (_) { return []; }
-}
-
-function saveLocalTutorials(tutorials) {
-  localStorage.setItem(LOCAL_TUTORIALS_KEY, JSON.stringify(tutorials));
-}
-
-function isLocalSession() {
-  return localStorage.getItem(LOCAL_SESSION_KEY) === "local";
-}
-
-function clearSession() {
-  localStorage.removeItem("ft_token");
-  localStorage.removeItem("ft_user_id");
-  localStorage.removeItem("ft_user_nome");
-  localStorage.removeItem("ft_user_role");
-  localStorage.removeItem(LOCAL_SESSION_KEY);
-}
-
-function saveSession(data, source = "api") {
-  const payload = normalizePayload(data) || {};
-  const user = payload.user || payload.usuario || {};
-  const token = payload.token || payload.accessToken;
-  if (token) localStorage.setItem("ft_token", token);
-  if (user._id || user.id) localStorage.setItem("ft_user_id", user._id || user.id);
-  if (user.nome || user.name) localStorage.setItem("ft_user_nome", user.nome || user.name);
-  if (user.role) localStorage.setItem("ft_user_role", user.role);
-  localStorage.setItem(LOCAL_SESSION_KEY, source);
-  return { token, user };
-}
-
-function localRegister(nome, password) {
-  if (!nome || !password) throw new Error("Nome e senha são obrigatórios.");
-  const users = getLocalUsers();
-  const exists = users.some((user) => String(user.nome).toLowerCase() === nome.toLowerCase());
-  if (exists) throw new Error("Esse nome já está em uso neste navegador. Tente outro nome.");
-  const user = { _id: `local_${Date.now()}`, nome, password, role: "user", active: true };
-  users.push(user);
-  saveLocalUsers(users);
-  return { token: createLocalToken("user"), user: { _id: user._id, nome: user.nome, role: user.role, active: true } };
-}
-
-function localLogin(nome, password) {
-  const user = getLocalUsers().find((item) => item.nome === nome && item.password === password && item.active !== false);
-  if (!user) throw new Error("Nome ou senha incorretos.");
-  return { token: createLocalToken(user.role || "user"), user: { _id: user._id, nome: user.nome, role: user.role || "user", active: true } };
-}
-
-function localAdminSession() {
-  return { token: createLocalToken("admin"), user: { _id: "admin_local", nome: "Administrador", role: "admin", active: true } };
-}
-
-function localCreateTutorial(payload) {
-  const Title = String(payload.Title || "").trim();
-  const Description = String(payload.Description || "").trim();
-  if (!Title || !Description) throw new Error("Título e descrição são obrigatórios.");
-  const tutorials = getLocalTutorials();
-  const tutorial = { _id: `local_tutorial_${Date.now()}`, Title, Description, local: true };
-  tutorials.unshift(tutorial);
-  saveLocalTutorials(tutorials);
-  return tutorial;
-}
-
-function localUpdateTutorial(id, payload) {
-  const tutorials = getLocalTutorials();
-  const index = tutorials.findIndex((tutorial) => tutorial._id === id);
-  if (index < 0) throw new Error("Tutorial não encontrado.");
-  tutorials[index] = { ...tutorials[index], Title: payload.Title, Description: payload.Description };
-  saveLocalTutorials(tutorials);
-  return tutorials[index];
-}
-
-function localDeleteTutorial(id) {
-  saveLocalTutorials(getLocalTutorials().filter((tutorial) => tutorial._id !== id));
-}
-
-function isCodigoAdminLocal(codigo) {
-  const limpo = String(codigo || "").trim().toLowerCase().replace(/\s+/g, "");
-  return limpo === "codigo1234" || limpo === "código1234" || limpo === "1234";
-}
-
-function asArray(response) {
-  const payload = normalizePayload(response);
-  if (Array.isArray(payload)) return payload;
-  if (payload && Array.isArray(payload.tutorials)) return payload.tutorials;
-  if (payload && Array.isArray(payload.usuarios)) return payload.usuarios;
-  if (payload && Array.isArray(payload.users)) return payload.users;
-  return [];
-}
-
-async function apiRequest(path, { method = "GET", body, auth = false } = {}) {
-  const headers = { "Content-Type": "application/json" };
-  if (auth) {
-    const token = localStorage.getItem("ft_token");
-    if (token) headers["Authorization"] = `Bearer ${token}`;
+  function normalizePayload(response) {
+    return response && typeof response === "object" && "data" in response ? response.data : response;
   }
-  let response;
-  try {
-    response = await fetch(`${API_BASE_URL}${path}`, {
-      method, headers, cache: "no-store", body: body ? JSON.stringify(body) : undefined,
-    });
-  } catch (_) {
-    const error = new Error("Não foi possível falar com o servidor. Verifique sua internet e tente novamente.");
-    error.status = 0;
-    throw error;
-  }
-  let data = null;
-  try { data = await response.json(); } catch (_) {}
-  if (!response.ok) {
-    const error = new Error((data && (data.message || data.error)) || "Algo deu errado. Tente novamente em instantes.");
-    error.status = response.status;
-    error.body = data;
-    throw error;
-  }
-  return data;
-}
 
-// O AuthControllers.js real embrulha a resposta em { message, data }.
-// Por isso desempacotamos "data" aqui, uma vez só, em vez de espalhar
-// ".data.data" por todo o resto do código.
-async function loginUser(payload) {
-  try {
-    return normalizePayload(await apiRequest("/auth/login", { method: "POST", body: payload }));
-  } catch (err) {
-    return localLogin(payload.nome, payload.password);
+  function base64UrlEncode(value) {
+    return btoa(JSON.stringify(value)).replace(/=/g, "").replace(/\+/g, "-").replace(/\//g, "_");
   }
-}
-async function registerUser({ nome, password }) {
-  try {
-    return normalizePayload(await apiRequest("/auth/register", { method: "POST", body: { nome, password } }));
-  } catch (err) {
-    return localRegister(nome, password);
-  }
-}
 
-async function entrarComCodigo(codigo) {
-  if (isCodigoAdminLocal(codigo)) return localAdminSession();
-  return normalizePayload(await apiRequest("/Admin/codigo", { method: "POST", body: { codigo } }));
-}
-async function createTutorial(payload) {
-  if (isLocalSession()) return localCreateTutorial(payload);
-  try {
-    const tutorial = normalizePayload(await apiRequest("/Tutorial/create/tutorial", { method: "POST", body: payload, auth: true }));
-    if (tutorial && tutorial._id) saveLocalTutorials([tutorial, ...getLocalTutorials().filter((item) => item._id !== tutorial._id)]);
-    return tutorial;
-  } catch (err) {
-    if (isAdmin()) return localCreateTutorial(payload);
-    throw err;
+  function createLocalToken(role) {
+    return `${base64UrlEncode({ alg: "none", typ: "JWT" })}.${base64UrlEncode({ role, local: true, exp: Math.floor(Date.now() / 1000) + 86400 })}.local`;
   }
-}
-async function getTutoriais() {
-  if (isLocalSession() || !isAdmin()) return getLocalTutorials();
-  try {
-    const tutorials = asArray(await apiRequest("/Tutorial/All/tutorial", { auth: true }));
-    if (tutorials.length) saveLocalTutorials(tutorials);
-    return tutorials;
-  } catch (err) {
-    const local = getLocalTutorials();
-    if (local.length) return local;
-    throw err;
-  }
-}
-async function editarTutorial(id, payload) {
-  if (isLocalSession() || String(id).startsWith("local_")) return localUpdateTutorial(id, payload);
-  try { return normalizePayload(await apiRequest(`/Tutorial/update/tutorial/${id}`, { method: "PUT", body: payload, auth: true })); }
-  catch (err) { return localUpdateTutorial(id, payload); }
-}
-async function excluirTutorial(id) {
-  if (isLocalSession() || String(id).startsWith("local_")) return localDeleteTutorial(id);
-  try { return apiRequest(`/Tutorial/delete/tutorial/${id}`, { method: "DELETE", auth: true }); }
-  catch (err) { return localDeleteTutorial(id); }
-}
-async function getUsuarios() {
-  if (isLocalSession()) return [...getLocalUsers().map(({ password, ...user }) => user)];
-  try { return asArray(await apiRequest("/Admin/usuarios", { auth: true })); }
-  catch (_) { return getLocalUsers().map(({ password, ...user }) => user); }
-}
-async function promoverUsuario(nome) {
-  if (isLocalSession()) {
-    const users = getLocalUsers().map((u) => u.nome === nome ? { ...u, role: "admin" } : u);
-    saveLocalUsers(users); return { ok: true };
-  }
-  try { return normalizePayload(await apiRequest("/Admin/promover", { method: "PUT", body: { nome }, auth: true })); }
-  catch (err) {
-    const users = getLocalUsers().map((u) => u.nome === nome ? { ...u, role: "admin" } : u);
-    saveLocalUsers(users); return { ok: true };
-  }
-}
-async function rebaixarUsuario(nome) {
-  if (isLocalSession()) {
-    const users = getLocalUsers().map((u) => u.nome === nome ? { ...u, role: "user" } : u);
-    saveLocalUsers(users); return { ok: true };
-  }
-  try { return normalizePayload(await apiRequest("/Admin/rebaixar", { method: "PUT", body: { nome }, auth: true })); }
-  catch (err) {
-    const users = getLocalUsers().map((u) => u.nome === nome ? { ...u, role: "user" } : u);
-    saveLocalUsers(users); return { ok: true };
-  }
-}
-async function excluirUsuario(nome) {
-  const users = getLocalUsers().filter((u) => u.nome !== nome);
-  saveLocalUsers(users);
-  return { ok: true };
-}
 
-async function atualizarMeuPerfil(payload) {
-  if (isLocalSession()) {
-    const id = localStorage.getItem("ft_user_id");
-    const users = getLocalUsers().map((user) => user._id === id ? { ...user, ...payload, role: user.role } : user);
-    saveLocalUsers(users);
-    return { _id: id, nome: payload.nome, role: localStorage.getItem("ft_user_role") || "user" };
+  function getLocalUsers() {
+    try { return JSON.parse(localStorage.getItem(LOCAL_USERS_KEY)) || []; } catch (_) { return []; }
   }
-  return normalizePayload(await apiRequest("/User/me", { method: "PUT", body: payload, auth: true }));
-}
-async function excluirMinhaConta() {
-  if (isLocalSession()) {
-    const id = localStorage.getItem("ft_user_id");
-    saveLocalUsers(getLocalUsers().filter((user) => user._id !== id));
-    return { ok: true };
+
+  function localLogin(nome, password) {
+    const user = getLocalUsers().find((item) => item.nome === nome && item.password === password && item.active !== false);
+    if (!user) throw new Error("Nome ou senha incorretos.");
+    return { token: createLocalToken(user.role || "user"), user: { _id: user._id, nome: user.nome, role: user.role || "user", active: true } };
   }
-  return apiRequest("/User/me", { method: "DELETE", auth: true });
-}
 
-// ============================================================
-// SESSÃO: ler o token salvo, saber se é admin
-// ============================================================
-function decodeJwt(token) {
-  try {
-    const payload = token.split(".")[1];
-    return JSON.parse(atob(payload.replace(/-/g, "+").replace(/_/g, "/")));
-  } catch (_) { return null; }
-}
-function isAdmin() {
-  const token = localStorage.getItem("ft_token");
-  if (!token) return false;
-  const payload = decodeJwt(token);
-  return Boolean(payload && (payload.role === "admin" || payload.isAdmin === true));
-}
+  function saveSession(data, source = "api") {
+    const payload = normalizePayload(data) || {};
+    const user = payload.user || payload.usuario || {};
+    const token = payload.token || payload.accessToken;
+    if (token) localStorage.setItem("ft_token", token);
+    if (user._id || user.id) localStorage.setItem("ft_user_id", user._id || user.id);
+    if (user.nome || user.name) localStorage.setItem("ft_user_nome", user.nome || user.name);
+    if (user.role) localStorage.setItem("ft_user_role", user.role);
+    localStorage.setItem(LOCAL_SESSION_KEY, source);
+    return { token, user };
+  }
 
-// ============================================================
-// NAVEGAÇÃO ENTRE TELAS (tudo em uma página só, sem recarregar)
-// ============================================================
-function updateNav() {
-  const nav = document.getElementById("nav-area");
-  const token = localStorage.getItem("ft_token");
-  const nome = localStorage.getItem("ft_user_nome");
-  if (token) {
-    nav.innerHTML = `
-      <a href="#" data-view="view-tutoriais">Tutoriais</a>
-      ${isAdmin() ? '<a href="#" data-view="view-tutorial">Criar tutorial</a>' : ""}
-      ${isAdmin() ? '<a href="#" data-view="view-usuarios">Usuários</a>' : ""}
-      <a href="#" data-view="view-perfil">Minha conta</a>
-      <span style="padding:0.6rem 0.4rem; color:var(--color-text-soft);">Olá, ${nome ? nome.split(" ")[0] : "você"}</span>
-      <button type="button" class="sair-btn" id="nav-sair">Sair</button>
+  async function apiRequest(path, { method = "GET", body } = {}) {
+    let response;
+    try {
+      response = await fetch(`${API_BASE_URL}${path}`, {
+        method,
+        headers: { "Content-Type": "application/json" },
+        body: body ? JSON.stringify(body) : undefined,
+        cache: "no-store",
+      });
+    } catch (_) {
+      const error = new Error("Não foi possível falar com o servidor. Verifique sua internet.");
+      error.status = 0;
+      throw error;
+    }
+    let data = null;
+    try { data = await response.json(); } catch (_) {}
+    if (!response.ok) {
+      const error = new Error((data && (data.message || data.error)) || "Nome ou senha incorretos.");
+      error.status = response.status;
+      throw error;
+    }
+    return data;
+  }
+
+  async function loginUser(payload) {
+    try {
+      return normalizePayload(await apiRequest("/auth/login", { method: "POST", body: payload }));
+    } catch (err) {
+      return localLogin(payload.nome, payload.password);
+    }
+  }
+
+  const FONT_SCALES = [1, 1.15, 1.3, 1.5, 1.7];
+  const FONT_SCALE_KEY = "ft_font_scale_index";
+  function applyFontScale(index) {
+    document.documentElement.style.setProperty("--font-scale", FONT_SCALES[index]);
+    localStorage.setItem(FONT_SCALE_KEY, index);
+    const label = document.getElementById("ft-font-scale-label");
+    if (label) label.textContent = `Letra ${Math.round(FONT_SCALES[index] * 100)}%`;
+  }
+  (function initTextSizeWidget() {
+    const widget = document.createElement("div");
+    widget.className = "text-size-widget";
+    widget.innerHTML = `
+      <button type="button" id="ft-font-decrease" aria-label="Diminuir tamanho da letra">A-</button>
+      <span class="label" id="ft-font-scale-label">Letra 100%</span>
+      <button type="button" id="ft-font-increase" aria-label="Aumentar tamanho da letra">A+</button>
     `;
-    document.getElementById("nav-sair").addEventListener("click", () => {
-      clearSession();
-      updateNav();
-      showView("view-cadastro");
+    document.body.appendChild(widget);
+    const saved = parseInt(localStorage.getItem(FONT_SCALE_KEY), 10);
+    let index = Number.isInteger(saved) && saved >= 0 && saved < FONT_SCALES.length ? saved : 0;
+    applyFontScale(index);
+    document.getElementById("ft-font-increase").addEventListener("click", () => {
+      index = Math.min(index + 1, FONT_SCALES.length - 1);
+      applyFontScale(index);
     });
-  } else {
-    nav.innerHTML = `
-      <a href="#" data-view="view-cadastro">Criar conta</a>
-      <a href="login.html">Entrar</a>
-      <a href="#" data-view="view-codigo-admin">Sou admin</a>
-    `;
+    document.getElementById("ft-font-decrease").addEventListener("click", () => {
+      index = Math.max(index - 1, 0);
+      applyFontScale(index);
+    });
+  })();
+
+  if (localStorage.getItem("ft_token")) {
+    window.location.href = "index.html";
   }
-  nav.querySelectorAll("a[data-view]").forEach((a) => {
-    a.addEventListener("click", (e) => {
-      e.preventDefault();
-      showView(a.dataset.view);
-    });
-  });
-}
 
-function showView(name) {
-  document.querySelectorAll(".view").forEach((v) => { v.hidden = v.id !== name; });
-  document.querySelectorAll("#nav-area a[data-view]").forEach((a) => {
-    if (a.dataset.view === name) a.setAttribute("aria-current", "page");
-    else a.removeAttribute("aria-current");
-  });
-  window.scrollTo({ top: 0, behavior: "smooth" });
-  if (name === "view-tutoriais") carregarTutoriais();
-  if (name === "view-usuarios") carregarUsuarios();
-  if (name === "view-perfil") prepararPerfil();
-}
-
-document.querySelectorAll('a[data-view]').forEach((a) => {
-  a.addEventListener("click", (e) => { e.preventDefault(); showView(a.dataset.view); });
-});
-
-// ============================================================
-// BOTÃO A- / A+ (acessibilidade: aumentar/diminuir a letra)
-// ============================================================
-const FONT_SCALES = [1, 1.15, 1.3, 1.5, 1.7];
-const FONT_SCALE_KEY = "ft_font_scale_index";
-function applyFontScale(index) {
-  document.documentElement.style.setProperty("--font-scale", FONT_SCALES[index]);
-  localStorage.setItem(FONT_SCALE_KEY, index);
-  const label = document.getElementById("ft-font-scale-label");
-  if (label) label.textContent = `Letra ${Math.round(FONT_SCALES[index] * 100)}%`;
-}
-(function initTextSizeWidget() {
-  const widget = document.createElement("div");
-  widget.className = "text-size-widget";
-  widget.setAttribute("role", "group");
-  widget.setAttribute("aria-label", "Ajustar o tamanho da letra");
-  widget.innerHTML = `
-    <button type="button" id="ft-font-decrease" aria-label="Diminuir tamanho da letra">A-</button>
-    <span class="label" id="ft-font-scale-label">Letra 100%</span>
-    <button type="button" id="ft-font-increase" aria-label="Aumentar tamanho da letra">A+</button>
-  `;
-  document.body.appendChild(widget);
-  const saved = parseInt(localStorage.getItem(FONT_SCALE_KEY), 10);
-  let index = Number.isInteger(saved) && saved >= 0 && saved < FONT_SCALES.length ? saved : 0;
-  applyFontScale(index);
-  document.getElementById("ft-font-increase").addEventListener("click", () => {
-    index = Math.min(index + 1, FONT_SCALES.length - 1);
-    applyFontScale(index);
-  });
-  document.getElementById("ft-font-decrease").addEventListener("click", () => {
-    index = Math.max(index - 1, 0);
-    applyFontScale(index);
-  });
-})();
-
-// ============================================================
-// MOSTRAR / OCULTAR SENHA
-// ============================================================
-document.querySelectorAll("[data-toggle-senha]").forEach((btn) => {
-  btn.addEventListener("click", () => {
-    const input = document.getElementById(btn.dataset.toggleSenha);
+  document.getElementById("toggle-senha").addEventListener("click", (e) => {
+    const input = document.getElementById("login-password");
     const showing = input.type === "text";
     input.type = showing ? "password" : "text";
-    btn.textContent = showing ? "Mostrar" : "Ocultar";
-    btn.setAttribute("aria-label", showing ? "Mostrar senha" : "Ocultar senha");
+    e.target.textContent = showing ? "Mostrar" : "Ocultar";
+    e.target.setAttribute("aria-label", showing ? "Mostrar senha" : "Ocultar senha");
   });
-});
 
+  const form = document.getElementById("login-form");
+  const message = document.getElementById("login-message");
+  const submitBtn = document.getElementById("login-submit");
 
-// ============================================================
-// FORMULÁRIOS: criar conta, entrar como admin, criar tutorial
-// ============================================================
-document.getElementById("cadastro-form").addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const message = document.getElementById("cadastro-message");
-  const submitBtn = document.getElementById("cadastro-submit");
-  message.className = "form-message";
-  submitBtn.disabled = true;
-  submitBtn.textContent = "Criando conta...";
-  const avisoDemora = setTimeout(() => { submitBtn.textContent = "Ainda criando... o servidor está acordando"; }, 4000);
-  try {
-    const nome = document.getElementById("cad-nome").value.trim();
-    const password = document.getElementById("cad-password").value;
-    if (!nome || !password) throw new Error("Digite seu nome e sua senha para criar a conta.");
-
-    // Uma chamada só: o /auth/register já devolve o token de uma vez,
-    // não precisa mais chamar /auth/login em seguida.
-    const data = await registerUser({ nome, password });
-    clearTimeout(avisoDemora);
-
-    saveSession(data, data?.token?.endsWith(".local") ? "local" : "api");
-    updateNav();
-    document.getElementById("cadastro-form").reset();
-    showView("view-tutoriais");
-    carregarTutoriais();
-
-  } catch (err) {
-    clearTimeout(avisoDemora);
-    message.textContent = err.message;
-    message.className = "form-message show error";
-  } finally {
-    submitBtn.disabled = false;
-    submitBtn.textContent = "Criar minha conta";
-  }
-});
-
-document.getElementById("codigo-admin-form").addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const message = document.getElementById("codigo-admin-message");
-  const submitBtn = document.getElementById("codigo-admin-submit");
-  message.className = "form-message";
-  submitBtn.disabled = true;
-  submitBtn.textContent = "Entrando...";
-  try {
-    const codigo = document.getElementById("codigo-admin-input").value.trim();
-    const data = await entrarComCodigo(codigo);
-    saveSession(data, data?.token?.endsWith(".local") ? "local" : "api");
-    updateNav();
-    message.textContent = "Pronto! Entrando...";
-    message.className = "form-message show success";
-    document.getElementById("codigo-admin-form").reset();
-    showView("view-tutorial");
-  } catch (err) {
-    message.textContent = err.message;
-    message.className = "form-message show error";
-  } finally {
-    submitBtn.disabled = false;
-    submitBtn.textContent = "Entrar";
-  }
-});
-
-document.getElementById("novo-tutorial-form").addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const message = document.getElementById("tutorial-message");
-  const submitBtn = document.getElementById("tutorial-submit");
-  message.className = "form-message";
-  submitBtn.disabled = true;
-  submitBtn.textContent = "Salvando...";
-  const avisoDemora = setTimeout(() => { submitBtn.textContent = "Ainda salvando... o servidor está acordando"; }, 4000);
-  try {
-    const payload = {
-      Title: document.getElementById("tut-titulo").value.trim(),
-      Description: document.getElementById("tut-descricao").value.trim(),
-    };
-    await createTutorial(payload);
-    clearTimeout(avisoDemora);
-    message.textContent = "Tutorial salvo com sucesso!";
-    message.className = "form-message show success";
-    document.getElementById("novo-tutorial-form").reset();
-  } catch (err) {
-    clearTimeout(avisoDemora);
-    message.textContent = err.message;
-    message.className = "form-message show error";
-  } finally {
-    submitBtn.disabled = false;
-    submitBtn.textContent = "Salvar tutorial";
-  }
-});
-
-// ============================================================
-// TUTORIAIS: listar (todo mundo vê); editar/excluir (só admin)
-// ============================================================
-function escapeHtml(texto) {
-  const div = document.createElement("div");
-  div.textContent = texto ?? "";
-  return div.innerHTML;
-}
-
-async function carregarTutoriais() {
-  const lista = document.getElementById("tutoriais-lista");
-  lista.innerHTML = '<p class="hint">Carregando...</p>';
-  try {
-    const tutoriais = await getTutoriais();
-    if (!Array.isArray(tutoriais) || tutoriais.length === 0) {
-      lista.innerHTML = '<p class="hint">Ainda não há tutoriais. Volte mais tarde.</p>';
-      return;
-    }
-    const admin = isAdmin();
-    lista.innerHTML = tutoriais.map((t) => `
-      <div class="form-card" style="margin-bottom:1rem;" data-tutorial-id="${t._id}">
-        <div class="tutorial-visualizacao">
-          <h3 style="margin-bottom:0.4rem;">${escapeHtml(t.Title)}</h3>
-          <p style="margin-bottom:${admin ? "0.8rem" : "0"};">${escapeHtml(t.Description)}</p>
-          ${admin ? `
-            <div style="display:flex; gap:1rem;">
-              <button type="button" class="btn-text btn-editar-tutorial">Editar</button>
-              <button type="button" class="btn-text btn-excluir-tutorial" style="color:#b91c1c;">Excluir</button>
-            </div>
-          ` : ""}
-        </div>
-        ${admin ? `
-          <div class="tutorial-edicao" style="display:none;">
-            <input type="text" class="edit-titulo note-title-input" value="${escapeHtml(t.Title)}" style="margin-bottom:0.6rem;">
-            <textarea class="edit-descricao note-content-textarea" style="min-height:120px; margin-bottom:0.6rem;">${escapeHtml(t.Description)}</textarea>
-            <div style="display:flex; gap:1rem;">
-              <button type="button" class="btn btn-salvar-edicao" style="width:auto; padding:0.6rem 1.2rem; min-height:auto;">Salvar</button>
-              <button type="button" class="btn-text btn-cancelar-edicao">Cancelar</button>
-            </div>
-          </div>
-        ` : ""}
-      </div>
-    `).join("");
-  } catch (err) {
-    lista.innerHTML = `<p class="form-message show error">${escapeHtml(err.message)}</p>`;
-  }
-}
-
-document.getElementById("tutoriais-lista").addEventListener("click", async (e) => {
-  const card = e.target.closest("[data-tutorial-id]");
-  if (!card) return;
-  const id = card.dataset.tutorialId;
-
-  if (e.target.classList.contains("btn-editar-tutorial")) {
-    card.querySelector(".tutorial-visualizacao").style.display = "none";
-    card.querySelector(".tutorial-edicao").style.display = "block";
-  } else if (e.target.classList.contains("btn-cancelar-edicao")) {
-    card.querySelector(".tutorial-visualizacao").style.display = "block";
-    card.querySelector(".tutorial-edicao").style.display = "none";
-  } else if (e.target.classList.contains("btn-salvar-edicao")) {
-    const titulo = card.querySelector(".edit-titulo").value.trim();
-    const descricao = card.querySelector(".edit-descricao").value.trim();
-    if (!titulo || !descricao) return;
-    e.target.disabled = true;
-    e.target.textContent = "Salvando...";
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    message.className = "form-message";
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Entrando...";
     try {
-      await editarTutorial(id, { Title: titulo, Description: descricao });
-      await carregarTutoriais();
+      const nome = document.getElementById("login-nome").value.trim();
+      const password = document.getElementById("login-password").value;
+      if (!nome || !password) throw new Error("Digite seu nome e sua senha para entrar.");
+      const data = await loginUser({ nome, password });
+
+      saveSession(data, data?.token?.endsWith(".local") ? "local" : "api");
+      window.location.href = "index.html";
     } catch (err) {
-      alert(err.message);
-      e.target.disabled = false;
-      e.target.textContent = "Salvar";
+      message.textContent = err.message;
+      message.className = "form-message show error";
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Entrar";
     }
-  } else if (e.target.classList.contains("btn-excluir-tutorial")) {
-    if (!confirm("Excluir este tutorial? Essa ação não pode ser desfeita.")) return;
-    try {
-      await excluirTutorial(id);
-      await carregarTutoriais();
-    } catch (err) {
-      alert(err.message);
-    }
-  }
-});
-
-// ============================================================
-// USUÁRIOS (admin): listar
-// ============================================================
-async function carregarUsuarios() {
-  const lista = document.getElementById("usuarios-lista");
-  lista.innerHTML = '<p class="hint">Carregando...</p>';
-  try {
-    const usuarios = await getUsuarios();
-    if (!Array.isArray(usuarios) || usuarios.length === 0) {
-      lista.innerHTML = '<p class="hint">Nenhum usuário encontrado.</p>';
-      return;
-    }
-    lista.innerHTML = usuarios.map((u) => {
-      const nome = u.nome || u.name || "";
-      const isA = u.role === "admin";
-      return `
-      <div class="form-card" style="margin-bottom:0.8rem; display:flex; flex-wrap:wrap; align-items:center; gap:0.6rem; justify-content:space-between;" data-user-nome="${escapeHtml(nome)}">
-        <div>
-          <strong>${escapeHtml(nome)}</strong>
-          ${isA ? '<span class="badge" style="margin-left:0.6rem;">admin</span>' : ""}
-        </div>
-        <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
-          ${isA
-            ? '<button type="button" class="btn-text btn-rebaixar">Rebaixar</button>'
-            : '<button type="button" class="btn-text btn-promover">Promover a admin</button>'}
-          <button type="button" class="btn-text btn-excluir-user" style="color:#b91c1c;">Excluir</button>
-        </div>
-      </div>`;
-    }).join("");
-  } catch (err) {
-    lista.innerHTML = `<p class="form-message show error">${escapeHtml(err.message)}</p>`;
-  }
-}
-
-document.getElementById("usuarios-lista").addEventListener("click", async (e) => {
-  const card = e.target.closest("[data-user-nome]");
-  if (!card) return;
-  const nome = card.dataset.userNome;
-  try {
-    if (e.target.classList.contains("btn-promover")) {
-      await promoverUsuario(nome);
-    } else if (e.target.classList.contains("btn-rebaixar")) {
-      await rebaixarUsuario(nome);
-    } else if (e.target.classList.contains("btn-excluir-user")) {
-      if (!confirm(`Excluir o usuário "${nome}"? Essa ação não pode ser desfeita.`)) return;
-      await excluirUsuario(nome);
-    } else return;
-    await carregarUsuarios();
-  } catch (err) { alert(err.message); }
-});
-
-
-// ============================================================
-// PERFIL: atualizar meus dados, excluir minha conta
-// ============================================================
-function prepararPerfil() {
-  document.getElementById("perfil-nome").value = localStorage.getItem("ft_user_nome") || "";
-  document.getElementById("perfil-password").value = "";
-  document.getElementById("perfil-message").className = "form-message";
-}
-
-document.getElementById("perfil-form").addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const message = document.getElementById("perfil-message");
-  const submitBtn = document.getElementById("perfil-submit");
-  message.className = "form-message";
-  submitBtn.disabled = true;
-  submitBtn.textContent = "Salvando...";
-  try {
-    const nome = document.getElementById("perfil-nome").value.trim();
-    const password = document.getElementById("perfil-password").value;
-    const payload = { nome };
-    if (password) payload.password = password;
-    const usuario = await atualizarMeuPerfil(payload);
-    if (usuario && usuario.nome) localStorage.setItem("ft_user_nome", usuario.nome);
-    updateNav();
-    document.getElementById("perfil-password").value = "";
-    message.textContent = "Dados atualizados com sucesso!";
-    message.className = "form-message show success";
-  } catch (err) {
-    message.textContent = err.message;
-    message.className = "form-message show error";
-  } finally {
-    submitBtn.disabled = false;
-    submitBtn.textContent = "Salvar alterações";
-  }
-});
-
-document.getElementById("perfil-btn-excluir").addEventListener("click", async () => {
-  if (!confirm("Excluir sua conta para sempre? Essa ação não pode ser desfeita.")) return;
-  try {
-    await excluirMinhaConta();
-    clearSession();
-    updateNav();
-    showView("view-cadastro");
-  } catch (err) {
-    alert(err.message);
-  }
-});
-
-// ============================================================
-// INICIALIZAÇÃO: monta o menu certo e mostra a tela inicial certa
-// ============================================================
-updateNav();
-if (localStorage.getItem("ft_token")) {
-  showView("view-tutoriais");
-  carregarTutoriais();
-} else {
-  showView("view-cadastro");
-}
+  });
 </script>
 </body>
 </html>
+
